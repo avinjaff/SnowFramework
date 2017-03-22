@@ -1,0 +1,1 @@
+<script src="/js_mvc/<?php echo $controller?>/<?php echo $action?>.js"></script>

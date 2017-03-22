@@ -1,0 +1,230 @@
+@font-face {
+    font-family: 'main';
+    src: url('../ttf_public/OpenSans-Regular.ttf');
+}
+* {
+    font-family: 'main';
+    -webkit-transition: width 1s, height 1s, background 1s, color 1s, font 1s, box-shadow 2s, -webkit-transform 1s, opacity 2s, border 1s;
+    transition: width 1s, height 1s, background 1s, color 1s, font 1s, box-shadow 2s, transform 1s, opacity 2s, border 1s;
+}
+body {
+	direction: ltr;
+	background-color: #c9d16a;
+	margin:0;
+	padding:0;
+}
+header, footer {
+	text-align: center;
+	background-color: #7db17c;
+	display: block;
+}
+    header img {
+        display: block;
+        opacity: .5;
+        height:5em;
+    }
+
+        header img:hover, header img:focus, header img:active {
+            opacity: 1;
+		}
+
+h1, h2 {
+    font-weight: inherit;
+    font-size: x-large;
+    text-align: center;
+    display: block;
+    background-image: url('Border2.png');
+    background-repeat: no-repeat;
+    background-size: 10em 5em;
+    background-position: center top;
+    height: 3em;
+    padding-top: 2em;
+    color: white;
+    background-color:#efefef;
+}
+
+h2.Title {
+    width:30em;
+    margin:0em auto 0 auto;
+    background-color:inherit;
+    height:5em;
+    font-size:1.5em;
+}
+
+h1 {
+    font-size: xx-large;
+}
+
+textarea, input, input[type="submit"], input[type="checkbox"], a, select, label {
+    height: 3em;
+    font-size: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-style: solid;
+    border-radius: .5em;
+    border-color: rgb(75, 75, 57);
+    border-width: .1em;
+    min-width: 10em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+table {
+    font-size:larger;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    box-shadow: 10px 10px 5px #888888;
+    border: 1px solid #bfbf00;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+    table tr:last-child td:last-child {
+        -moz-border-radius-bottomright: 0px;
+        -webkit-border-bottom-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    table table tr:first-child td:first-child {
+        -moz-border-radius-topleft: 0px;
+        -webkit-border-top-left-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    table table tr:first-child td:last-child {
+        -moz-border-radius-topright: 0px;
+        -webkit-border-top-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    table tr:last-child td:first-child {
+        -moz-border-radius-bottomleft: 0px;
+        -webkit-border-bottom-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    
+    table tr:nth-child(odd) {
+        background-color: #ffffaa;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+
+    table td {
+        vertical-align: middle;
+        border: 1px solid #bfbf00;
+        border-width: 0px 1px 1px 0px;
+        text-align: left;
+        padding: 8px;
+        font-size: 10px;
+        font-family: Arial;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    table tr:last-child td {
+        border-width: 0px 1px 0px 0px;
+    }
+
+    table tr td:last-child {
+        border-width: 0px 0px 1px 0px;
+    }
+
+    table tr:last-child td:last-child {
+        border-width: 0px 0px 0px 0px;
+    }
+
+    table tr:first-child td {
+        background: -o-linear-gradient(bottom, #ffff00 5%, #e8e800 100%);
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffff00), color-stop(1, #e8e800) );
+        background: -moz-linear-gradient( center top, #ffff00 5%, #e8e800 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffff00", endColorstr="#e8e800");
+        background: -o-linear-gradient(top,#ffff00,e8e800);
+        background-color: #ffff00;
+        border: 0px solid #bfbf00;
+        text-align: center;
+        border-width: 0px 0px 1px 1px;
+        font-size: 14px;
+        font-family: Arial;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    table tr:first-child:hover td {
+        background: -o-linear-gradient(bottom, #ffff00 5%, #e8e800 100%);
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffff00), color-stop(1, #e8e800) );
+        background: -moz-linear-gradient( center top, #ffff00 5%, #e8e800 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffff00", endColorstr="#e8e800");
+        background: -o-linear-gradient(top,#ffff00,e8e800);
+        background-color: #ffff00;
+    }
+
+    table tr:first-child td:first-child {
+        border-width: 0px 0px 1px 0px;
+    }
+
+    table tr:first-child td:last-child {
+        border-width: 0px 0px 1px 1px;
+    }
+a {
+    text-decoration: none;
+    color: inherit;
+    font: inherit;
+    padding: 1em;
+    margin:0em;
+    background-color: white;
+    color: rgb(75, 75, 57);
+}
+
+    a:hover, a:focus, a:active, textarea:hover, textarea:focus, textarea:active, input:hover, input:active, input:focus /*, fieldset:active, fieldset:focus, fieldset:hover*/ {
+        color: white;
+        background-color: rgb(75, 75, 57);
+    }
+
+.ui-button:hover, .ui-button:focus, .ui-button:active {
+    color: inherit;
+}
+
+form {
+}
+
+    form input[type="text"], form input[type="password"] {
+    }
+
+fieldset {
+    border-radius: 1em;
+    display: block;
+    margin: 0 auto 0 auto;
+    width: 50%;
+}
+
+    fieldset legend {
+        padding-left: 2em;
+    }
+
+hr {
+    display: none;
+}
+
+label {
+    border: none;
+}

@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'main';
+    src: url('../ttf_public/OpenSans-Regular.ttf');
+}
+* {
+    font-family: main;
+}
+body div{
+	color: black !important;
+}
+body header, body footer{
+	text-align: center;
+	border-style: solid;
+	border-color: gold;
+	background-color: antiquewhite;
+}
+body header{
+	max-height: 5em;
+}
+body div{
+	margin:2em;
+}
+body header img{
+	top: .5em;
+	left: .5em;
+	width:2.5em;
+	position: absolute
+}

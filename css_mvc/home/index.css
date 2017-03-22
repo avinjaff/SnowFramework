@@ -1,0 +1,8 @@
+body{
+	text-align: center;
+}
+#logo {
+	display: inline-block;
+	height: 10em;
+	width: 10em;
+}

@@ -1,0 +1,23 @@
+Options +FollowSymLinks -MultiViews -Indexes
+RewriteEngine on
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule !^(((\~)?[\w\/\-\ \.]*(\.(php|css|js|png|jpg|jpeg|html|ttf|ico)|\/[\w\/\-\ ]*)|(^\w*))(\?.*)?)$ Forbidden [QSA,L,R,NC,P,F,L]
+
+RewriteRule ^$ mvc/home/index [L]
+
+RewriteRule ^mvc/(.+)/(.+)/$ frontMVC.php?controller=$1&action=$2 [QSA]
+RewriteRule ^mvc/(.+)/(.+)$ frontMVC.php?controller=$1&action=$2 [QSA]
+
+RewriteRule ^api/(.+)/(.+)/$ frontAPI.php?controller=$1&action=$2 [QSA]
+RewriteRule ^api/(.+)/(.+)$ frontAPI.php?controller=$1&action=$2 [QSA]
+
+RewriteRule favicon.ico ico_favicon/favicon.ico
+RewriteRule logo png_icon/_logo.png
+
+
+RewriteRule abnt/(.+)/(.+)/Device/Login/ ABNT_Emulator/login.php?username=$1&language=$2 [QSA,L]
+RewriteRule abnt/(.+)/(.+)/Device/Login ABNT_Emulator/login.php?username=$1&language=$2 [QSA,L]
+RewriteRule abnt/(.+)/(.+)/Device/Logout/ ABNT_Emulator/logout.php?username=$1&language=$2 [QSA,L]
+RewriteRule abnt/(.+)/(.+)/Device/Logout ABNT_Emulator/logout.php?username=$1&language=$2 [QSA,L]
+RewriteRule abnt/(.+)/(.+)/Device/AppAllow/ ABNT_Emulator/allow.php?username=$1&language=$2 [QSA,L]
+RewriteRule abnt/(.+)/(.+)/Device/AppAllow ABNT_Emulator/allow.php?username=$1&language=$2 [QSA,L]
