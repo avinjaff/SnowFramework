@@ -1,1 +1,0 @@
-alert('use javascript with JSON and you are done! khodaya shokret!');
