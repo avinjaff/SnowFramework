@@ -1,7 +1,8 @@
 <?php
-define('ABNT_PATH', 'http://localhost/abnt');
-define('DATA_PATH', realpath(dirname(__FILE__).'/DATA'));
- 
+// define('DATA_PATH', realpath(dirname(__FILE__).'/DATA'));
+define('ROOT', ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 43) ? "https" : "http") . "://" . ($_SERVER['SERVER_ADDR']) . ":" . ($_SERVER['SERVER_PORT']));
+
+
 include_once 'php_api_model/circle.php';
 include_once 'php_api_model/log.php';
 
