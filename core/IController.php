@@ -3,8 +3,10 @@
 interface IController{
 
 	const resultType = 'JSON';
-	function sendResult();
-
+	function GET();
+	function POST();
+	function PUT();
+	function DELETE();
 }
 
 ?>

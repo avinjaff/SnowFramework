@@ -3,28 +3,22 @@ include('../core/AController.php');
 
 class homeController extends AController{
 
-	function __construct(){
+	// function __construct(){
 		
-	}
-	function __destruct(){
+	// }
+	// function __destruct(){
 		
-	}
+	// }
 	
 	// function setData($Data){
 	// 	parent::setData($Data);
 	// }
 
-	function sendResult(){ 
-		parent::sendResult();
+	function GET(){ 
+		parent::GET();
 	}
 
 }
 
 $home = new homeController();
-
-$home->setData("this is home controller");
-$home->sendResult();
-
-
-
 ?>
