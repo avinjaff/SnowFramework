@@ -6,21 +6,15 @@ class Db
 {
 	function Open()
 	{
-		$conn = new mysqli(about::ConnectionString_SERVER,about::ConnectionString_USERNAME,about::ConnectionString_PASSWORD,about::ConnectionString_DATABASE);
-
-		if ($conn->connect_error) {
-		    return 'Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error;
-		}
+		return
+		new mysqli(Config::ConnectionString_SERVER,Config::ConnectionString_USERNAME,Config::ConnectionString_PASSWORD,Config::ConnectionString_DATABASE);
 	}
 	function Close()
 	{
 		try {
 		    mysqli_close($conn);
 		}
-		catch (Exception $exp)
-		{
-			return 'Connect was closed';
-		}
+		catch (Exception $exp) { }
 	}
 }
 ?>

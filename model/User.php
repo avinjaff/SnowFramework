@@ -1,32 +1,24 @@
 <?php
 
-include('../core/IModel.php');
-class User implements IModel
+include('../core/AModel.php');
+include('../core/Db.php');
+
+class User extends AModel
 {
-	public $Firstname;
-	public $Lastname;
-	public $Password;
 
-	function ToList()
+	/// props
+	// public $Id;
+	// public $Firstname;
+	// public $Lastname;
+	// public $Password;
+
+	function __construct()
 	{
+		self::SetTable('People');
+		self::SetProperties(['Id', 'Firstname', 'Lastname','Username', 'Password']);
+	}
 
-	}
-	function Get($id)
-	{
-
-	}
-	function Delete($id){
-
-	}
-	function Update($previousId, $model)
-	{
-
-	}
-	function Insert($model)
-	{
-		
-	}
- 
+	
 }
 
 ?>

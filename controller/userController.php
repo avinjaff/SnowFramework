@@ -1,22 +1,19 @@
 <?php 
 include('../core/AController.php');
+include('../model/User.php');
 
 class userController extends AController{
 
-	// function __construct(){
-		
-	// }
-	// function __destruct(){
-		
-	// }
-	
-	// function setData($Data){
-	// 	parent::setData($Data);
-	// }
-
 	function GET(){ 
 		parent::GET();
-		parent::setData(parent::getRequest()['Username']);
+
+		// $model = new User();
+		// $id = parent::getRequest()['id'];
+		// $data = $model->Select($id);
+		// parent::setData($data);
+		
+		parent::setData((new User())->Select(parent::getRequest()['id']));
+
 		parent::returnData();
 	}
 
