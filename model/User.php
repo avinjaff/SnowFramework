@@ -6,12 +6,6 @@ include('../core/Db.php');
 class User extends AModel
 {
 
-	/// props
-	// public $Id;
-	// public $Firstname;
-	// public $Lastname;
-	// public $Password;
-
 	function __construct()
 	{
 		self::SetTable('People');
