@@ -5,22 +5,10 @@ include ('IController.php');
 abstract class AController implements IController{
 
 	private $data = '' ;
+	private $request = '' ;
+
 
 	function __construct(){
-		/*
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			$this->POST();
-		}
-		else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-			$this->GET();
-		}
-		else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-			$this->PUT(); 
-		}
-		else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-			$this->DELETE();
-		}
-		*/
 		$this->{$_SERVER['REQUEST_METHOD']}();
 	}
 	function __destruct(){
@@ -28,6 +16,12 @@ abstract class AController implements IController{
 	}
 	function setData($data){
 		$this->data = $data;
+	}
+	function setRequest($request){
+		$this->request = $request;
+	}
+	function getRequest(){
+		return $this->request;	
 	}
 	function returnData (){
 		if (constant('self::'.'resultType')=='JSON')
@@ -38,20 +32,24 @@ abstract class AController implements IController{
 		else echo $this->data;
 	}
 	function GET(){
-		$this->setData("get");
-		$this->returnData();
+		$this->setRequest($_GET);
+		// $this->setData("get");
+		// $this->returnData();
 	}
 	function POST(){
-		$this->setData("post");
-		$this->returnData();
+		$this->setRequest($_POST);
+		// $this->setData("post");
+		// $this->returnData();
 	}
 	function DELETE(){
+		$this->setRequest($_DELETE);
 		$this->setData("delete");
-		$this->returnData();
+		// $this->returnData();
 	}
 	function PUT(){
-		$this->setData("put");
-		$this->returnData();
+		$this->setRequest($_PUT);
+		// $this->setData("put");
+		// $this->returnData();
 	}
 
 }

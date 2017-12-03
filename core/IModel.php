@@ -8,7 +8,8 @@ interface IModel {
 	function ToList();
 	function Get($id);
 	function Delete($id);
-	function Update($prevId, $model);
+	function Update($previousId, $model);
+	function Insert($model);
 	
 }
 ?>
