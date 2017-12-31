@@ -3,10 +3,16 @@
 interface IController{
 
 	const resultType = 'JSON';
-	function GET();
-	function POST();
-	function PUT();
-	function DELETE();
+
+	function getRequest();
+	function setData($Data);
+	function returnData();
+
+
+	function GET($Auth = false);
+	function POST($Auth = false);
+	function PUT($Auth = false);
+	function DELETE($Auth = false);
 }
 
 ?>

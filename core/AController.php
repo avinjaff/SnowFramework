@@ -1,6 +1,7 @@
 <?php
 
 include ('IController.php');
+include ('Auth.php');
 
 abstract class AController implements IController{
 
@@ -31,23 +32,39 @@ abstract class AController implements IController{
 		}
 		else echo $this->data;
 	}
-	function GET(){
+	function GET($Auth = false){
 		$this->setRequest($_GET);
+
+		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
+			return;
+
 		// $this->setData("get");
 		// $this->returnData();
 	}
-	function POST(){
+	function POST($Auth = false){
 		$this->setRequest($_POST);
+
+		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
+		return;
+
 		// $this->setData("post");
 		// $this->returnData();
 	}
-	function DELETE(){
+	function DELETE($Auth = false){
 		$this->setRequest($_DELETE);
+
+		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
+		return;
+
 		$this->setData("delete");
 		// $this->returnData();
 	}
-	function PUT(){
+	function PUT($Auth = false){
 		$this->setRequest($_PUT);
+
+		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
+		return;
+
 		// $this->setData("put");
 		// $this->returnData();
 	}
