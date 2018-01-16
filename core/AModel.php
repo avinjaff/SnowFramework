@@ -2,13 +2,19 @@
 include('IModel.php');
 abstract class AModel implements IModel
 {
-	private $props = '';
-	private $table = '';
-	private $propscount = '';
+	private $props = ''; // props [0] = key, props [1] = value
+	private $table = ''; // table name in db
+	private $propscount = ''; // how many props passed to methods?
 
+	function SetValue($Key, $Value){
+		$this->props[$Key] = $Value;
+	}
 	function SetProperties($Properties){
 		$this->props = $Properties;
 		$this->propscount = sizeof($Properties);
+	}
+	function GetProperties(){
+		return $this->props;
 	}
 	function SetTable($Table)
 	{
@@ -21,10 +27,17 @@ abstract class AModel implements IModel
 	}
 	function Select($id)
 	{
-		$fields =  "`" . $this->props[0] . "`";
+		$fields =  "`" . $this->props[0]->key . "`";
+
 		for ($i=1; $i < $this->propscount; $i++) { 
 			$fields  = $fields . ",`" . $this->props[$i] . "`";
 		}
+
+		// while($element = current($array)) {
+		// 	$fields  = $fields . ",`" . key($current) . "`";
+		// 	next($array);
+		// }
+
 		$query  = "SELECT " 
 		. $fields
 		. " FROM `" . $this->table
@@ -41,18 +54,38 @@ abstract class AModel implements IModel
 		 	return $items;
 		}
 	}
-	function Delete($id){
-
+	function Delete(){
+		// delete based on this->props["Id"]
 	}
-	function Update($previousId, $model)
+	function Update($previousId)
 	{
 
 	}
-	function Insert($model)
+	function Insert()
 	{
+		$db = new Db();
+		$conn = $db->Open();
+
+		$query  = "INSERT INTO " . $this->table . " (";
+
+		$i=0;
+		foreach($this->GetProperties() as $key => $value){
+			$query .= '`' . $key . '`'. ((++$i === $this->propscount) ? "" : "," );
+		}
 		
-	}
- 
+		$query = $query . ") VALUES (";
 
+		$i=0;
+		foreach($this->GetProperties() as $key => $value){
+			$query = $query .
+			(($value === NULL) ? "NULL" : ("'" .
+			mysqli_real_escape_string($conn, $value) 
+			. "'"))
+			. ((++$i === $this->propscount) ? "" : "," );
+		}
+		$query = $query . ");";
+
+		mysqli_query($conn, $query);
+	}
 }
 ?>

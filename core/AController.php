@@ -9,7 +9,7 @@ abstract class AController implements IController{
 	private $request = '' ;
 
 
-	function __construct(){
+	function __construct(){		
 		$this->{$_SERVER['REQUEST_METHOD']}();
 	}
 	function __destruct(){
