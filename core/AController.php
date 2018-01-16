@@ -8,7 +8,6 @@ abstract class AController implements IController{
 	private $data = '' ;
 	private $request = '' ;
 
-
 	function __construct(){		
 		$this->{$_SERVER['REQUEST_METHOD']}();
 	}
@@ -34,40 +33,23 @@ abstract class AController implements IController{
 	}
 	function GET($Auth = false){
 		$this->setRequest($_GET);
-
 		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
 			return;
-
-		// $this->setData("get");
-		// $this->returnData();
 	}
 	function POST($Auth = false){
 		$this->setRequest($_POST);
-
 		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
-		return;
-
-		// $this->setData("post");
-		// $this->returnData();
+			return;
 	}
 	function DELETE($Auth = false){
-		$this->setRequest($_DELETE);
-
+		$this->setRequest($_GET);
 		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
-		return;
-
-		$this->setData("delete");
-		// $this->returnData();
+			return;
 	}
 	function PUT($Auth = false){
-		$this->setRequest($_PUT);
-
+		$this->setRequest($_PUT); // TODO: Solve error -> Undefined variable: _PUT
 		if ($Auth  && !(new Auth())->IsValid($this->getRequest()['Username'], $this->getRequest()['Password']))
-		return;
-
-		// $this->setData("put");
-		// $this->returnData();
+			return;
 	}
-
 }
 ?>
