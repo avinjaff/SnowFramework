@@ -40,6 +40,8 @@ abstract class AModel implements IModel
 		$db = new Db();
 		$conn = $db->Open();
 		$result = mysqli_query($conn, $query);
+		if (!$result)
+			return;
 		$num = mysqli_num_rows($result);
 		if ($num == 1) {
 			 $values = mysqli_fetch_array($result);
@@ -67,7 +69,6 @@ abstract class AModel implements IModel
 			. ((++$i === $this->propscount) ? "" : ", " );
 		}
 		$query .=" WHERE `Id`=" . $previousId;
-		echo $query; // TODO
 		mysqli_query($conn, $query);
 	}
 	function Insert()

@@ -4,7 +4,7 @@ interface IController{
 
 	const resultType = 'JSON';
 
-	function getRequest();
+	function getRequest($index);
 	function setData($Data);
 	function returnData();
 
