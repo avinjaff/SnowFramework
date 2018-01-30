@@ -33,7 +33,10 @@ abstract class AController implements IController{
 	}
 	function GET($Auth = false){
 		$this->setRequest($_GET);
-		if ($Auth  && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
+		$Username = $this->getRequest('Username');
+		$Password = $this->getRequest('Password');
+		$Authh =(new Auth())->IsValid($Username, $Password);
+		if ($Auth && !$Authh)
 			return;
 	}
 	function POST($Auth = false){
@@ -81,25 +84,6 @@ abstract class AController implements IController{
 			return;
 	}
 	function PUT($Auth = false){
-		/*
-		$put = array();
-		parse_str(file_get_contents('php://input'), $put);
-		*/
-		/*
-		$this->setRequest($_PUT);
-		*/
-		/*
-		parse_str(file_get_contents("php://input"),$post_vars);
-		echo $post_vars['fruit']." is the fruit\n";
-		*/
-		/*
-		$putfp = fopen('php://input', 'r');
-		$putdata = '';
-		while($data = fread($putfp, 1024))
-			$putdata .= $data;
-		fclose($putfp);
-		*/
-
 		$raw_data = file_get_contents('php://input');
 		$boundary = substr($raw_data, 0, strpos($raw_data, "\r\n"));
 		$parts = array_slice(explode($boundary, $raw_data), 1);
