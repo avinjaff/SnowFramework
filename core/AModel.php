@@ -91,6 +91,7 @@ abstract class AModel implements IModel
 		}
 		$query = $query . ");";
 		mysqli_query($conn, $query);
+		$this->SetValue('Id', mysqli_insert_id($conn));
 	}
 }
 ?>
