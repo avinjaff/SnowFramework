@@ -9,8 +9,7 @@ class userController extends AController{
 		$model = new User();
 		$id = parent::getRequest("id");
 		$model->SetValue("Id", $id);
-		$model->Select();
-		$data = $model->GetProperties();
+		$data = $model->Select();
 		parent::setData($data);
 		parent::returnData();
 	}

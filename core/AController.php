@@ -33,16 +33,19 @@ abstract class AController implements IController{
 	}
 	function GET($Auth = false){
 		$this->setRequest($_GET);
-		$Username = $this->getRequest('Username');
-		$Password = $this->getRequest('Password');
-		$Authh =(new Auth())->IsValid($Username, $Password);
-		if ($Auth && !$Authh)
-			return;
+		if ($Auth && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
+		{
+			header("HTTP/1.1 401 Unauthorized");
+			exit;
+		}
 	}
 	function POST($Auth = false){
 		$this->setRequest($_POST);
-		if ($Auth  && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
-			return;
+		if ($Auth && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
+		{
+			header("HTTP/1.1 401 Unauthorized");
+			exit;
+		}
 	}
 	function DELETE($Auth = false){
 		$raw_data = file_get_contents('php://input');
@@ -80,8 +83,11 @@ abstract class AController implements IController{
 
 		}
 		$this->setRequest($_DELETE);
-		if ($Auth  && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
-			return;
+		if ($Auth && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
+		{
+			header("HTTP/1.1 401 Unauthorized");
+			exit;
+		}
 	}
 	function PUT($Auth = false){
 		$raw_data = file_get_contents('php://input');
@@ -119,8 +125,11 @@ abstract class AController implements IController{
 
 		}
 		$this->setRequest($_PUT);
-		if ($Auth  && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
-			return;
+		if ($Auth && !(new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password')))
+		{
+			header("HTTP/1.1 401 Unauthorized");
+			exit;
+		}
 	}
 }
 ?>
