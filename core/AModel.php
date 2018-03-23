@@ -21,10 +21,17 @@ abstract class AModel implements IModel
 		$this->table = $Table;
 	}
 
-	function ToList($desc = null,$take = null, $skip = 	null)
-	{
-
-	}
+    function ToList($Skip = 0 , $Take = 10, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
+    {
+        $query = "SELECT * FROM `" . $this->table . "` " . $Clause . " ORDER BY `" . $OrderField . "` " . $OrderArrange . " LIMIT ". $Take . " OFFSET " . $Skip . ";";
+        $result = mysqli_query($this->conn, $query);
+        $rows = array();
+        if ($result)
+            while(($row = mysqli_fetch_array($result))) {
+                $rows[] = $row;
+            }
+        return $rows;       
+    }
 	function Select()
 	{
 		$i=0;
