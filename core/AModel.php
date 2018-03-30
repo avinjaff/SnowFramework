@@ -21,17 +21,10 @@ abstract class AModel implements IModel
 		$this->table = $Table;
 	}
 
-    function ToList($Skip = 0 , $Take = 10, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
-    {
-        $query = "SELECT * FROM `" . $this->table . "` " . $Clause . " ORDER BY `" . $OrderField . "` " . $OrderArrange . " LIMIT ". $Take . " OFFSET " . $Skip . ";";
-        $result = mysqli_query($this->conn, $query);
-        $rows = array();
-        if ($result)
-            while(($row = mysqli_fetch_array($result))) {
-                $rows[] = $row;
-            }
-        return $rows;       
-    }
+	function ToList($desc = null,$take = null, $skip = 	null)
+	{
+
+	}
 	function Select()
 	{
 		$i=0;
@@ -42,21 +35,40 @@ abstract class AModel implements IModel
 		}
 		$query  = "SELECT " 
 		. $fields
-		. " FROM `" . $this->table
-		. "` WHERE Id = " . $this->GetProperties()["Id"]; // RULE: Every table should contain a field called Id which is a PK, or we can define PK later.
+		. " FROM `" . $this->table . "`";
+		if ($this->GetProperties()["Id"] != null)
+		{
+			$query .= " WHERE Id = " . $this->GetProperties()["Id"]; // RULE: Every table should contain a field called Id which is a PK, or we can define PK later.
+		}
+		
 		$db = new Db();
 		$conn = $db->Open();
 		$result = mysqli_query($conn, $query);
 		if (!$result)
+		{
+			header("HTTP/1.0 404 Not Found");
 			return;
+		}
 		$num = mysqli_num_rows($result);
-		if ($num == 1) {
-			 $values = mysqli_fetch_array($result);
-			 $i=0;
-			 $fields = '';
-			 foreach($this->GetProperties() as $key => $value){
-				$this->SetValue($key, $values[$key]);
-			 }
+		if ($num == 1)
+		{
+			$i=0;
+			$fields = '';
+			$values = mysqli_fetch_array($result);
+			foreach($this->GetProperties() as $key => $value){
+			$this->SetValue($key, $values[$key]);
+			}
+			// Return Single Record
+			return $this->GetProperties();
+		}
+		else if ($num > 1)
+		{
+			// Return Multiple Rows
+			$rows = array();
+			while(($row = mysqli_fetch_array($result))) {
+				$rows[] = $row;
+			}
+			return $rows;
 		}
 	}
 	function Delete(){
