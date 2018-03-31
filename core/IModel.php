@@ -6,8 +6,7 @@ interface IModel {
 	function SetTable($Table);
 	function SetValue($Key, $Value);
 
-	function ToList($desc = null,$take = null, $skip = null);
-	function Select();
+	function Select($Skip = 0 , $Take = 10, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '');
 	function Delete();
 	function Update($previousId);
 	function Insert();

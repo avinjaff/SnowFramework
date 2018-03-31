@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        جاپایاب
+    </title>
+
+    <link href="css/font.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/color.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/index.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/button.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/form.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/input.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/animation.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/table.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/message.css" rel="stylesheet" type="text/css" title="Default Style">
+    <link href="css/loading.css" rel="stylesheet" type="text/css" title="Default Style">
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/jquery.tayyebi.js"></script>
+    <script src="js/Hi.js"></script>
+
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="LockOn"><img class="loading" /></div>
+
+<header>
+  <h1>جاپایاب</h1>
+</header>
+
+<nav class="nav">
+<ul>
+  جاپایاب
+  <li onclick="Hi.load('dashboard');"><img src="img/dashboard.png" /><a>داشبورد</a></li>
+  <li onclick="Hi.load('login');"><img src="img/login.png" /><a>احراز هویت</a></li>
+  <li onclick="Hi.load('map');"><img src="img/map.png" /><a>نقشه</a></li>
+  <li onclick="Hi.load('devices');"><img src="img/placeholder.png" /><a>ردیاب‌های من</a></li>
+  <li class="disabled"><a>دور فرمانی (فعال در موبایل)</a></li>
+  <li onclick="Hi.load('lbs');"><img src="img/platform.png" /><a>گزارش دکل‌ها</a></li>
+  <li onclick="Hi.load('route');"><img src="img/map.png" /><a>مسیر پیموده شده</a></li>
+  وضعیت هشدار
+  <li onclick="Hi.load('zones');"><img src="img/fence.png" /><a >محدوده های مجاز</a></li>
+  <li onclick="Hi.load('speed');"><img src="img/speedometer.png" /><a>سرعت‌های غیر مجاز</a></li>
+  <li onclick="Hi.load('off-line');"><img src="img/grid-off.png" /><a>گزارش قطعی ارتباط با ماهواره</a></li>
+  امور مشتریان
+  <li onclick="Hi.load('about-us');"><img src="img/about-us.png" /><a>درباره ما</a></li>
+  <li onclick="Hi.load('contact-us');"><img src="img/people.png" /><a>تماس با روابط عمومی</a></li>
+  نرم‌افزار موبایل
+  <li><img src="img/android.png" /><a href="japayab.apk">دانلود اپلیکیشن اندروید</a></li>
+  <li><img src="img/ios.png" /><a href="https://itunes.apple.com/">دانلود اپلیکیشن آی‌او‌اس</a></li>
+  <li><img src="img/windows-phone.png" /><a href="https://www.microsoft.com/store/apps">دانلود اپلیکیشن ویندوز‌فون</a></li>
+  مدیر سیستم
+  <li onclick="Hi.load('users');"><img src="img/users.png" /><a>مدیریت کاربران</a></li>
+  <li onclick="Hi.load('imei');"><img src="img/imei.png" /><a>ثبت دستگاه‌های تولید شده</a></li>
+  <li onclick="Hi.load('assignment');"><img src="img/assignment.png" /><a>مدیریت مالکیت دستگاه‌ها</a></li>
+</ul>
+</nav>
+
+
+<div class="message" style="display: none;">
+</div>
+
+<div class="content">
+</div>
+
+<footer>طراحی و توسعه نرم‌‌افزار در گردرگ،‌ تمامی حقوق برای هنگ‌من محفوظ است © hangman.com</footer>
+
+</body>
+  <script>
+    Hi.load('dashboard');
+    $(window).on('load', function () {Hi.loading(false);});
+  </script>
+</html>

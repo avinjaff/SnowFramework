@@ -21,11 +21,7 @@ abstract class AModel implements IModel
 		$this->table = $Table;
 	}
 
-	function ToList($desc = null,$take = null, $skip = 	null)
-	{
-
-	}
-	function Select()
+	function Select($Skip = 0 , $Take = 10, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
 	{
 		$i=0;
 		$fields = '';
@@ -38,9 +34,12 @@ abstract class AModel implements IModel
 		. " FROM `" . $this->table . "`";
 		if ($this->GetProperties()["Id"] != null)
 		{
-			$query .= " WHERE Id = " . $this->GetProperties()["Id"]; // RULE: Every table should contain a field called Id which is a PK, or we can define PK later.
+			$query .= " WHERE Id = " . $this->GetProperties()["Id"] . ";"; // RULE: Every table should contain a field called Id which is a PK, or we can define PK later.
 		}
-		
+		else
+		{
+			$query .= " " . $Clause . " ORDER BY `" . $OrderField . "` " . $OrderArrange . " LIMIT ". $Take . " OFFSET " . $Skip . ";";
+		}
 		$db = new Db();
 		$conn = $db->Open();
 		$result = mysqli_query($conn, $query);
@@ -74,27 +73,35 @@ abstract class AModel implements IModel
 	function Delete(){
 		$db = new Db();
 		$conn = $db->Open();
-		$query  = "DELETE FROM " . $this->table . " WHERE `Id`=" . $this->GetProperties()["Id"];
+		$query  = "DELETE FROM `" . $this->table . "` WHERE `Id`=" . $this->GetProperties()["Id"];
 		mysqli_query($conn, $query);
 	}
 	function Update($previousId)
 	{
 		$db = new Db();
 		$conn = $db->Open();
-		$query  = "UPDATE " . $this->table . " SET ";
+		$query  = "UPDATE `" . $this->table . "` SET ";
 		$i=0;
 		foreach($this->GetProperties() as $key => $value){
-			$query .= '`' . $key . "` = '" . $value . "'"
-			. ((++$i === $this->propscount) ? "" : ", " );
+			if (isset($value))
+				if ($key == "Id" || substr($key, 0, 2) == "Is") // NOTE: Id must be integer and boolean fields must start with "Is"
+					$query .= '`' . $key . "` = " . $value . ", ";
+				else
+					$query .= '`' . $key . "` = '" . $value . "', ";
 		}
+		$query = substr($query, 0, -2); // Delete last ,
 		$query .=" WHERE `Id`=" . $previousId;
 		mysqli_query($conn, $query);
 	}
 	function Insert()
 	{
+		/*
+		TODO:
+		if ($key == "Id" || substr($key, 0, 2) == "Is")
+		*/
 		$db = new Db();
 		$conn = $db->Open();
-		$query  = "INSERT INTO " . $this->table . " (";
+		$query  = "INSERT INTO `" . $this->table . "` (";
 		$i=0;
 		foreach($this->GetProperties() as $key => $value){
 			$query .= '`' . $key . '`'. ((++$i === $this->propscount) ? "" : ", " );
