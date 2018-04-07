@@ -16,11 +16,13 @@ class User extends AModel
 			'Firstname'=>NULL,
 			'Lastname'=>NULL,
 			'NationalCode'=>NULL,
+			'Password'=>NULL,
+			'IsActive'=>NULL,
+			'Type'=>NULL,
 			'Image'=>NULL,
 		));
 	}
 
 	
 }
-
 ?>
