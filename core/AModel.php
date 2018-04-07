@@ -4,6 +4,7 @@ abstract class AModel implements IModel
 {
 	private $props = ''; // props [0] = key, props [1] = value
 	private $table = ''; // table name in db
+	private $pk = 'Id'; // pk in table
 	private $propscount = ''; // how many props passed to methods?
 
 	function SetValue($Key, $Value){
@@ -20,8 +21,12 @@ abstract class AModel implements IModel
 	{
 		$this->table = $Table;
 	}
+	function SetPrimaryKey($PrimaryKey)
+	{
+		$this->pk = $PrimaryKey;
+	}
 
-	function Select($Skip = 0 , $Take = 10, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
+	function Select($Skip = -1 , $Take = -1, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
 	{
 		$i=0;
 		$fields = '';
@@ -32,13 +37,16 @@ abstract class AModel implements IModel
 		$query  = "SELECT " 
 		. $fields
 		. " FROM `" . $this->table . "`";
-		if ($this->GetProperties()["Id"] != null)
+		if ($this->GetProperties()[$this->pk] != null)
 		{
-			$query .= " WHERE Id = " . $this->GetProperties()["Id"] . ";"; // RULE: Every table should contain a field called Id which is a PK, or we can define PK later.
+			$query .= " WHERE " . $this->pk . " = " . $this->GetProperties()[$this->pk] . ";";
 		}
 		else
 		{
-			$query .= " " . $Clause . " ORDER BY `" . $OrderField . "` " . $OrderArrange . " LIMIT ". $Take . " OFFSET " . $Skip . ";";
+			$query .= " " . $Clause . " ORDER BY `" . $OrderField . "` " . $OrderArrange .
+			(($Take == -1)? "" : " LIMIT " . $Take) .
+			(($Skip == -1)? "" : " OFFSET " . $Skip)
+			. ";";
 		}
 		$db = new Db();
 		$conn = $db->Open();
@@ -73,7 +81,7 @@ abstract class AModel implements IModel
 	function Delete(){
 		$db = new Db();
 		$conn = $db->Open();
-		$query  = "DELETE FROM `" . $this->table . "` WHERE `Id`=" . $this->GetProperties()["Id"];
+		$query  = "DELETE FROM `" . $this->table . "` WHERE " . $this->pk . "=" . $this->GetProperties()[$this->pk];
 		mysqli_query($conn, $query);
 	}
 	function Update($previousId)
@@ -84,20 +92,20 @@ abstract class AModel implements IModel
 		$i=0;
 		foreach($this->GetProperties() as $key => $value){
 			if (isset($value))
-				if ($key == "Id" || substr($key, 0, 2) == "Is") // NOTE: Id must be integer and boolean fields must start with "Is"
+				if ($key == $this->pk || substr($key, 0, 2) == "Is" || $key == "Image") // NOTE: PK must be integer and boolean fields must start with "Is"
 					$query .= '`' . $key . "` = " . $value . ", ";
 				else
 					$query .= '`' . $key . "` = '" . $value . "', ";
 		}
 		$query = substr($query, 0, -2); // Delete last ,
-		$query .=" WHERE `Id`=" . $previousId;
+		$query .=" WHERE " . $this->pk . "=" . $previousId;
 		mysqli_query($conn, $query);
 	}
 	function Insert()
 	{
 		/*
 		TODO:
-		if ($key == "Id" || substr($key, 0, 2) == "Is")
+		if ($key == $this->pk || substr($key, 0, 2) == "Is" || Image)
 		*/
 		$db = new Db();
 		$conn = $db->Open();
@@ -117,7 +125,7 @@ abstract class AModel implements IModel
 		}
 		$query = $query . ");";
 		mysqli_query($conn, $query);
-		$this->SetValue('Id', mysqli_insert_id($conn));
+		$this->SetValue($this->pk, mysqli_insert_id($conn));
 	}
 }
 ?>
