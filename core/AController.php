@@ -11,11 +11,18 @@ abstract class AController implements IController{
 	function login()
 	{
 		// TODO: Check for UserType
-		$_GET['_LOGGINID']= (new Auth())->IsValid($this->getRequest('Username'), $this->getRequest('Password'));
-		if ($_GET['_LOGGINID'] == null)
+		$query = [];
+		$parts = parse_url($_SERVER['REQUEST_URI']);
+		if (isset($parts['query']))
+		parse_str($parts['query'], $query);
+		if (isset($query['Username']) && isset($query['Password']))
 		{
-			header("HTTP/1.1 401 Unauthorized");
-			exit;
+			$_GET['_LOGGINID']= (new Auth())->IsValid($query['Username'], $query['Password']);
+			if ($_GET['_LOGGINID'] == null)
+			{
+				header("HTTP/1.1 401 Unauthorized");
+				exit;
+			}
 		}
 	}
 
