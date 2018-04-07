@@ -7,8 +7,10 @@ class userController extends AController{
 	function GET($Auth = true){
 		parent::GET($Auth);
 		$model = new User();
-		$id = parent::getRequest("id");
-		$model->SetValue("Id", $id);
+		if (parent::getRequest('LOGINHELLO') == "true")
+			$model->SetValue("Id", $_GET['_LOGGINID']);
+		else
+			$model->SetValue("Id", parent::getRequest('Id'));		
 		$data = $model->Select();
 		parent::setData($data);
 		parent::returnData();
@@ -25,12 +27,12 @@ class userController extends AController{
 		parent::returnData();
 	}
 
-	function PUT($Auth = false)
+	function PUT($Auth = true)
 	{
 		parent::PUT($Auth);
 		$user = new User();
 		foreach($user->GetProperties() as $key => $value){
-			$user->SetValue($key, parent::getRequest($key));
+				$user->SetValue($key, parent::getRequest($key));
 		}
 		$user->Update(parent::getRequest("previousId"));
 		parent::setData($user->GetProperties());
