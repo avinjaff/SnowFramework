@@ -31,7 +31,6 @@ $('#login').on('submit', function (event) {
     + "&Password=" + $("input[name=Password]").val();
 
     jQuery.get($url, function(data){
-
         $.cookie("UserId", data.Id);
         $.cookie("Username", data.Username, { expires : 10 });
         $.cookie("Password", $("input[name=Password]").val(), { expires : 10 });

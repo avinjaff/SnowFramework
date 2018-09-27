@@ -55,12 +55,17 @@ class Authentication {
 	}
 	public function LeavesCount($InitKey, $InitValue = null)
 	{
+		
 		$query  = "SELECT Count(*) as LeavesCount FROM `AccessLevels` WHERE `InitKey`='" . $InitKey . "'";
 		if ($InitValue != null)
 			$query .= " AND `InitValue`='" . $InitValue . "'";
 		$db = new Db();
 		$conn = $db->Open();
+		
 		$result = mysqli_query($conn, $query);
+		if (!$result)
+			return 0;
+		
 		$row = $result->fetch_assoc();
 		return $row['LeavesCount'];
 	}
@@ -73,9 +78,7 @@ class Authentication {
 	{
 		$db = new Db();
 		$conn = $db->Open();
-		
 		$query = "SELECT DISTINCT * FROM `AccessLevels`";
-
 		if ($IsLeaf)
 		{
 			$query  .= " WHERE `FinalKey`='" . $Key . "'";
@@ -93,11 +96,9 @@ class Authentication {
 		}
 		$query .= " AND `IsOnline` = 1";
 		$results = array();
-		$result = mysqli_query($conn, $query);
+		$result = mysqli_query($conn, $query);		
 		while($row = mysqli_fetch_array($result))
 		{
-	
-
 			if ($IsLeaf)
 				$results[] = array(
 					'Key' => $row['FinalKey'],

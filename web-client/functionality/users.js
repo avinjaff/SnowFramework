@@ -1,27 +1,43 @@
 Hi.auth(true);
-$url = Hi.home() + "/userController.php"
-+ "?" + Hi.loginprotocol();
 
-/*
+function users(){
+    $('#search').flexdatalist({
+        searchContain: false,
+        textProperty: '{Username}: {Fullname}',
+        valueProperty: 'Username',
+        minLength: 1,
+        focusFirstResult: true,
+        selectionRequired: true,
+        visibleProperties: ["Username", "Fullname"],
+        searchIn: ["Username", "Fullname", "Id"],
+        url: Hi.home() + '/BridgeController.php' + "?" + "Id=dw_users.sql" + "&&Params=[param1:Username,param2:Firstname,param3:Lastname]&" + Hi.loginprotocol(),
+        relatives: '#relative'
+    });
+}
 
-TODO: Download User Image
-    [snowframework]/controller/userController.php?Username=09388063351&Password=123&Id=38&BinImage=%E2%9C%93
 
-*/
+$.get(Hi.home() + '/BridgeController.php' + "?" + "Id=dw_users.sql" + "&&Params=[param1:Username,param2:Firstname,param3:Lastname]&" + Hi.loginprotocol() , function(data, status){ 
+    console.log(data);
+});
 
-$.get($url , function(data, status){ 
+
+$.get(Hi.home() + "/userController.php?HashPassword=✓&BinImage=✓"
++ "&" + Hi.loginprotocol() , function(data, status){ 
     if (JSON.stringify(data).charAt(0) == "{")
         data = JSON.parse("[" + JSON.stringify(data) + "]");
+
     data.forEach(obj => {
         var tr="<tr>";
         var td0 = "<td>" +
         "<input type=\"button\" onclick=\"Hi.load('users_activate', " + obj["Id"] + ");\" value=\"" + ((obj["IsActive"] == '1')? "غیر فعال کردن" : "فعال کردن"  ) + "\">" + 
         "<input type=\"button\" onclick=\"Hi.load('users_edit', " + obj["Id"] + ");\" value=\"ویرایش\">" + 
         "</td>";
-        var td1="<td>"+obj["Id"]+"</td>";
-        var td2="<td>"+obj["Firstname"]+"</td>";
-        var td3="<td>"+obj["Lastname"]+"</td>";
-        var td4="<td>"+obj["PrimaryNumber"]+"</td></tr>";
-       $("#users").append(tr+td0+td1+td2+td3+td4); 
+        var td ="<td>"+obj["Id"]+"</td>";
+        td += "<td>"+obj["Firstname"]+"</td>";
+        td += "<td>"+obj["Lastname"]+"</td>";
+        td += "<td>"+obj["Username"]+"</td>";
+        td += "<td>"+"TODO: IMG"+"</td></tr>";
+        $("#users").append(tr+td0+td);
+        console.log(obj["HashPassword"]); // For Test Only
     });
 });

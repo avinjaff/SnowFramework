@@ -56,23 +56,20 @@ abstract class AModel implements IModel
 	function Select($Skip = -1 , $Take = -1, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
 	{
 		$fields = '';
-		$j = 0; 
+
 		foreach($this->GetProperties() as $key => $value)
+		{
+			if (!$this->IsReserved($key, true))
+				$fields .= '`' . $key . '`, ';
+			
 			if ($value != null)
 			{
 				if (($key != $this->pk && $value == "✓")
 					|| $key == $this->pk)
 				{
 					$fields .= '`' . $key . '`, ';
-					$j++;
 				}
 			}
-		if (($j <= 1))
-		{
-			$fields = '';
-			foreach($this->GetProperties() as $key => $value)
-				if (!$this->IsReserved($key, true))
-					$fields .= '`' . $key . '`, ';
 		}
 		$fields = substr($fields, 0, -2);
 		$query  = "SELECT " . $fields . " FROM `" . $this->table . "`";

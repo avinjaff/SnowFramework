@@ -57,7 +57,6 @@
         <span>مدیریت کاربران</span>
         <li onclick="Hi.load('users');"><img src="img/register.png" /><a>مدیریت کاربران</a></li>
         <li class="inactive"><a>منوی غیر فعال (برای تست)</a></li>
-        <li onclick="Hi.load('test');"><a>تست اتصال به پایگاه داده</a></li>
     </nav>
 
     <div id="myModal" class="modal">
@@ -81,7 +80,7 @@
     if (!Hi.auth())
       $(".side-bar").hide();
 
-    Hi.load('dashboard');
+    Hi.load('users');
 
     $(window).on('load', function () {
       Hi.loading(false);

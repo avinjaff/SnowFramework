@@ -4,20 +4,8 @@ include('../model/User.php');
 
 class userController extends AController{
 
-	/* NOTE:
-	
-	Checkout:
-		[snowframework]/controller/deviceController.php?Username=admin&BinImage=✓
-	vs
-		[snowframework]/controller/deviceController.php?Username=admin
-
-	*/
-
 	function GET($Auth = true){
 		parent::GET($Auth);
-
-		echo '{"Id":"0","Username":"admin","Firstname":"محمدرضا","Lastname":"طیبی","NationalCode":"3600000000","HashPassword":null,"IsActive":"1","Type":"ADMIN","BinImage":null}';
-		return; // Ignore next lines for test 
 
 		$model = new User();
 		if (parent::getRequest('LOGINHELLO') == "true")

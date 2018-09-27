@@ -23,8 +23,7 @@ Hi = {
         $('.content').load('view/' + name + '.htm', function() {
             $.getScript('functionality/' + name + '.js', function() {
                 Hi.loading(false);
-                if (jQuery.isFunction(window[name]))
-                    window[name](params);
+
                 Hi.paginate();
                 $("input[type=date]").attr('id', 'persianDate');
                 $("input[type=date]").attr('type', 'text');
@@ -59,11 +58,14 @@ Hi = {
                         // alert($(target).attr("data-gdate"));
                      }
                 });
+
+                if (jQuery.isFunction(window[name]))
+                    window[name](params);
             });
         });
     },
     loginprotocol(){
-        return "Username=" + $.cookie("PrimaryNumber")
+        return "Username=" + $.cookie("Username")
         + "&Password=" + $.cookie("Password");
     },
     home(){

@@ -10,9 +10,6 @@ abstract class AController implements IController{
 
 	function login()
 	{
-		return ($Username == "admin" && $Password == "123") ? "0" : null; // Ignore next lines for test
-
-		// TODO: Check for UserType
 		$query = [];
 		$parts = parse_url($_SERVER['REQUEST_URI']);
 		if (isset($parts['query']))
