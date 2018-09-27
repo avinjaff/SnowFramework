@@ -1,0 +1,34 @@
+
+nav>ul>li {
+    margin: 15px 5px;
+    padding: 10px 15px 12px;
+    font-size: .8em;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  nav>ul>li img {
+    height: 15px;
+    margin-left: 10px;
+    right: 20px;
+  }
+
+  #export{
+    background-image: url('../img/export.png');
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    background-position: right center;
+    background-position-x: 1em;
+    padding-left: 2.5em;
+  }
+
+  #play{
+    background-image: url('../img/play.png');
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    background-position: right center;
+    background-position-x: 1em;
+    padding-left: 2.5em;
+    margin: 1em auto 1em auto;
+    display: block;
+  }
