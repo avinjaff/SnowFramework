@@ -1,7 +1,7 @@
 <?php
 
 include('../core/AModel.php');
-include('../core/Db.php');
+require_once '../core/Db.php';
 
 class User extends AModel
 {
@@ -12,17 +12,15 @@ class User extends AModel
 		self::SetProperties(array(
 			// 'KEY' => DEFAULT_VALUE,
 			'Id'=>NULL,
-			'PrimaryNumber'=>NULL,
+			'Username'=>NULL,
 			'Firstname'=>NULL,
 			'Lastname'=>NULL,
 			'NationalCode'=>NULL,
-			'Password'=>NULL,
-			'IsActive'=>NULL,
-			'Type'=>NULL,
-			'Image'=>NULL,
+			'HashPassword'=>NULL,
+			'IsActive'=>1,
+			'Type'=>'USER',
+			'BinImage'=>NULL,
 		));
 	}
-
-	
 }
 ?>

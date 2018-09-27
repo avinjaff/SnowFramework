@@ -1,14 +1,37 @@
 <?php
-include('IModel.php');
+include_once 'IModel.php';
+
 abstract class AModel implements IModel
 {
 	private $props = ''; // props [0] = key, props [1] = value
+	private $operands = []; // props that will go for update
 	private $table = ''; // table name in db
 	private $pk = 'Id'; // pk in table
+	private $pkType = 'Int'; // pk in table
 	private $propscount = ''; // how many props passed to methods?
+
+	function IsReserved($Field, $IgnoreAggregate = false)
+	{
+		return
+			(
+			($Field == $this->pk && !$IgnoreAggregate) ||
+			(substr($Field, 0, 2) == "Is" && !$IgnoreAggregate ) ||
+			substr($Field, 0, 3) == "Bin" ||
+			substr($Field, 0, 4) == "Hash");
+	}
+	function DoHash($InputString)
+	{
+		return password_hash($InputString, PASSWORD_DEFAULT);
+	}
 
 	function SetValue($Key, $Value){
 		$this->props[$Key] = $Value;
+	}
+	function SetOperand($Key){
+		array_push($this->operands, $Key);	
+	}
+	function IsOperand($Key){
+		return in_array($Key,$this->operands);
 	}
 	function SetProperties($Properties){
 		$this->props = $Properties;
@@ -25,25 +48,41 @@ abstract class AModel implements IModel
 	{
 		$this->pk = $PrimaryKey;
 	}
+	function SetPrimaryKeyType($PrimaryKeyType)
+	{
+		$this->pkType = $PrimaryKeyType;
+	}
 
 	function Select($Skip = -1 , $Take = -1, $OrderField = 'Id', $OrderArrange = 'ASC', $Clause = '')
 	{
-		$i=0;
 		$fields = '';
-		foreach($this->GetProperties() as $key => $value){
-			$fields .= '`' . $key . '`'
-			. ((++$i === $this->propscount) ? "" : ", " );
-		}
-		$query  = "SELECT " 
-		. $fields
-		. " FROM `" . $this->table . "`";
-		if ($this->GetProperties()[$this->pk] != null)
+		$j = 0; 
+		foreach($this->GetProperties() as $key => $value)
+			if ($value != null)
+			{
+				if (($key != $this->pk && $value == "✓")
+					|| $key == $this->pk)
+				{
+					$fields .= '`' . $key . '`, ';
+					$j++;
+				}
+			}
+		if (($j <= 1))
 		{
-			$query .= " WHERE " . $this->pk . " = " . $this->GetProperties()[$this->pk] . ";";
+			$fields = '';
+			foreach($this->GetProperties() as $key => $value)
+				if (!$this->IsReserved($key, true))
+					$fields .= '`' . $key . '`, ';
+		}
+		$fields = substr($fields, 0, -2);
+		$query  = "SELECT " . $fields . " FROM `" . $this->table . "`";
+		if ($this->GetProperties()[$this->pk] != null) // TODO: Any parameter that wasn't null
+		{
+			$query .= " WHERE `" . $this->pk . "` = " . $this->GetProperties()[$this->pk] . ";";
 		}
 		else
 		{
-			$query .= " " . $Clause . " ORDER BY `" . $OrderField . "` " . $OrderArrange .
+			$query .= " " . $Clause . " ORDER BY " . $OrderField . " " . $OrderArrange .
 			(($Take == -1)? "" : " LIMIT " . $Take) .
 			(($Skip == -1)? "" : " OFFSET " . $Skip)
 			. ";";
@@ -62,9 +101,9 @@ abstract class AModel implements IModel
 			$i=0;
 			$fields = '';
 			$values = mysqli_fetch_array($result);
-			foreach($this->GetProperties() as $key => $value){
-			$this->SetValue($key, $values[$key]);
-			}
+			foreach($this->GetProperties() as $key => $value)
+				if (isset($values[$key]))
+					$this->SetValue($key, $values[$key]);
 			// Return Single Record
 			return $this->GetProperties();
 		}
@@ -78,7 +117,9 @@ abstract class AModel implements IModel
 			return $rows;
 		}
 	}
-	function Delete(){
+	function Delete()
+	{
+		$this->Select();
 		$db = new Db();
 		$conn = $db->Open();
 		$query  = "DELETE FROM `" . $this->table . "` WHERE " . $this->pk . "=" . $this->GetProperties()[$this->pk];
@@ -90,23 +131,45 @@ abstract class AModel implements IModel
 		$conn = $db->Open();
 		$query  = "UPDATE `" . $this->table . "` SET ";
 		$i=0;
-		foreach($this->GetProperties() as $key => $value){
+		foreach($this->GetProperties() as $key => $value)
+		{
+			if (!$this->IsOperand($key))
+				continue;
+			
+			if ($this->IsReserved($key)
+				&& substr($key, 0, 2) == "Is")
+			{
+				if ($value == "on")
+					$value = "1";
+				else if ($value == "off")
+					$value = "0";
+			}		
+			else if ($this->IsReserved($key)
+				&& substr($key, 0, 4) == "Hash")
+			{
+				$value = "'" . $this->DoHash($value) . "'";
+			}
+			else if ($this->IsReserved($key)
+				&& substr($key, 0, 3) == "Bin")
+			{
+				$value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
+				// $value = "'" . base64_decode(explode(',', $value)[1]) . "'";
+			}
 			if (isset($value))
-				if ($key == $this->pk || substr($key, 0, 2) == "Is" || $key == "Image") // NOTE: PK must be integer and boolean fields must start with "Is"
+				if ($this->IsReserved($key))
 					$query .= '`' . $key . "` = " . $value . ", ";
 				else
 					$query .= '`' . $key . "` = '" . $value . "', ";
 		}
 		$query = substr($query, 0, -2); // Delete last ,
 		$query .=" WHERE " . $this->pk . "=" . $previousId;
+		if (!$this->IsOperand($this->pk))
+			$this->SetValue($this->pk,$previousId);
+		$this->Select();
 		mysqli_query($conn, $query);
 	}
 	function Insert()
 	{
-		/*
-		TODO:
-		if ($key == $this->pk || substr($key, 0, 2) == "Is" || Image)
-		*/
 		$db = new Db();
 		$conn = $db->Open();
 		$query  = "INSERT INTO `" . $this->table . "` (";
@@ -117,12 +180,35 @@ abstract class AModel implements IModel
 		$query = $query . ") VALUES (";
 		$i=0;
 		foreach($this->GetProperties() as $key => $value){
-			$query = $query .
-			(($value === NULL) ? "NULL" : ("'" .
-			mysqli_real_escape_string($conn, $value) 
-			. "'"))
-			. ((++$i === $this->propscount) ? "" : ", " );
+			if ($this->IsReserved($key)
+				&& substr($key, 0, 2) == "Is")
+			{
+				if ($value == "on")
+					$value = "1";
+				else if ($value == "off")
+					$value = "0";
+			}		
+			else if ($this->IsReserved($key)
+				&& substr($key, 0, 4) == "Hash")
+			{
+				$value = "'" . $this->DoHash($value) . "'";
+			}
+			else if ($this->IsReserved($key)
+				&& substr($key, 0, 3) == "Bin")
+			{
+				$value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
+				// $value = "'" . base64_decode(explode(',', $value)[1]) . "'";
+			}
+			if (isset($value))
+				if ($this->IsReserved($key) and $this->pkType != "String")
+					$query .=  $value;
+				else
+					$query .= "'" . $value . "'";
+			else $query .= "NULL";
+
+			$query .=  ", ";
 		}
+		$query = substr($query, 0, -2); // Delete last ,
 		$query = $query . ");";
 		mysqli_query($conn, $query);
 		$this->SetValue($this->pk, mysqli_insert_id($conn));

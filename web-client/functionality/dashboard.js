@@ -2,11 +2,12 @@ Hi.auth();
 
 // Access Tree
 
-
 $url = Hi.home() + "/dashboardController.php"
 + "?" + Hi.loginprotocol();
 $.get($url , function(data, status){ 
-    $('#details').jsonView(data);
+
+    Hi.modal();
+    $('.modal-content>p').jsonView(data);
 
     var nodes = null;
     var edges = null;
@@ -43,15 +44,6 @@ $.get($url , function(data, status){
                 case "Users.Id":
                     icon = "users.png";
                     break;
-                case "Devices.Imei":
-                    icon = "imei.png";
-                    break;
-                case "SimCards.Number":
-                    icon = "sim.png";
-                    break;
-                case "Zones.Id":
-                    icon = "fence.png";
-                    break;
             }
             iid++;
             nodes.push({id: iid, label: mylabel, image: DIR + icon, shape: 'image'});
@@ -59,10 +51,8 @@ $.get($url , function(data, status){
             nav(item.Leaves, mylabel);
         }
     }
-    nodes.push({id: iid, label: 'AtiElectronic', image: 'Logo.svg', shape: 'image'});
-    nav(data, 'AtiElectronic');
-
-
+    nodes.push({id: iid, label: 'Adam', image: 'Logo.svg', shape: 'image'});
+    nav(data, 'Adam');    
 
     // if not father and duplicated
 
@@ -93,7 +83,7 @@ $.get($url , function(data, status){
             }
         }
     }
-    
+
     var container = document.getElementById('access');
     var data = {
         nodes: nodes,
@@ -101,4 +91,6 @@ $.get($url , function(data, status){
     };
     var options = {};
     network = new vis.Network(container, data, options);
+}, "json").fail(function() {
+    Hi.message('خطا در دریافت اطلاعات', true);
 });

@@ -6,7 +6,7 @@ function users_edit(id){
 
     $.get(url, function(data){ 
         $('input[name="previousId"]').val(data.Id);
-        $('input[name="PrimaryNumber"]').val(data.PrimaryNumber);
+        $('input[name="Username"]').val(data.Username);
         $('input[name="Firstname"]').val(data.Firstname);
         $('input[name="Lastname"]').val(data.Lastname);
         $('input[name="NationalCode"]').val(data.NationalCode);

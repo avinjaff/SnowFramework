@@ -16,5 +16,14 @@ class Db
 		}
 		catch (Exception $exp) { }
 	}
+	function Log($Notes, $UserId, $Connection){
+		$conn = $this->Open();
+		$query  = "INSERT INTO `Logs` (`Content`, `UserId`, `Event`, `Agent`, `Connection`) VALUES ('" .
+		mysqli_real_escape_string($conn, $Notes ) 
+		. "', " . $UserId . ", NOW(), 'API', '" . 
+		mysqli_real_escape_string($conn, $Connection ) 
+		. "');";
+		mysqli_query($conn, $query);
+	}
 }
 ?>

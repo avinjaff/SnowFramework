@@ -48,7 +48,6 @@ header >h1 {
 }
 .content{
     background-color: white;
-    background-image: url('../img/hamedan.jpg');
     background-size: 100% auto;
     background-position: bottom;
     background-repeat: no-repeat;

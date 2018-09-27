@@ -1,5 +1,5 @@
 function register(){
-    // $('input[name=PrimaryNumber]').mask('980000000000', {placeholder: "98__________"});
+    // $('input[name=Username]').mask('980000000000', {placeholder: "98__________"});
 }
 
 $('#register').on('submit', function (event) {

@@ -1,4 +1,4 @@
-if ($.cookie("PrimaryNumber") == null )
+if ($.cookie("Username") == null )
     $( "#logout" ).hide();
 else
     $( "#login" ).hide();
@@ -6,15 +6,14 @@ else
 
 
 function login(){
-    // $('input[name=PrimaryNumber]').mask('980000000000', {placeholder: "98__________"});
+    // $('input[name=Username]').mask('980000000000', {placeholder: "98__________"});
 }
-    
 
 $('#logout').on('submit', function (event) {
     event.preventDefault();
 
     $.removeCookie("Id");
-    $.removeCookie("PrimaryNumber");
+    $.removeCookie("Username");
     $.removeCookie("Password");
     $.removeCookie("IsActive");
     $.removeCookie("Type");
@@ -28,19 +27,20 @@ $('#login').on('submit', function (event) {
 
     $url = Hi.home() + "/userController.php"
     + "?LOGINHELLO=true"
-    + "&Username=" + $("input[name=PrimaryNumber]").val()
+    + "&Username=" + $("input[name=Username]").val()
     + "&Password=" + $("input[name=Password]").val();
 
     jQuery.get($url, function(data){
+
         $.cookie("UserId", data.Id);
-        $.cookie("PrimaryNumber", data.PrimaryNumber, { expires : 10 });
+        $.cookie("Username", data.Username, { expires : 10 });
         $.cookie("Password", $("input[name=Password]").val(), { expires : 10 });
-        $.cookie("IsActive", data.Type, { expires : 10 });
         $.cookie("Type", data.Type, { expires : 10 });
+
         Hi.message('خوش آمدید!');
         $(".side-bar").show();
         Hi.load('dashboard');
-    }).fail(function() {
+    }, "json").fail(function() {
         Hi.message('خطا در احراز هویت', true);
     });
 });

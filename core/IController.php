@@ -8,7 +8,6 @@ interface IController{
 	function setData($Data);
 	function returnData();
 
-
 	function GET($Auth = false);
 	function POST($Auth = false);
 	function PUT($Auth = false);

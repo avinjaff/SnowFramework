@@ -1,7 +1,7 @@
 @font-face {
-    font-family: 'irsans';
-    src: url("../font/irsans.ttf");
+    font-family: 'Behdad';
+    src: url("../font/Behdad.ttf");
 }
 *{
-    font-family: 'irsans';
+    font-family: 'Behdad';
 }

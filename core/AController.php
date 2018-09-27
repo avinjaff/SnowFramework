@@ -1,7 +1,7 @@
 <?php
 
-include ('IController.php');
-include ('Auth.php');
+include_once 'IController.php';
+include_once 'Auth.php';
 
 abstract class AController implements IController{
 
@@ -10,6 +10,8 @@ abstract class AController implements IController{
 
 	function login()
 	{
+		return ($Username == "admin" && $Password == "123") ? "0" : null; // Ignore next lines for test
+
 		// TODO: Check for UserType
 		$query = [];
 		$parts = parse_url($_SERVER['REQUEST_URI']);
@@ -17,26 +19,32 @@ abstract class AController implements IController{
 		parse_str($parts['query'], $query);
 		if (isset($query['Username']) && isset($query['Password']))
 		{
-			$_GET['_LOGGINID']= (new Auth())->IsValid($query['Username'], $query['Password']);
+			$_GET['_LOGGINID'] = (new Authentication())->IsValid($query['Username'], $query['Password']);
 			if ($_GET['_LOGGINID'] == null)
 			{
 				header("HTTP/1.1 401 Unauthorized");
 				exit;
 			}
+			return $_GET['_LOGGINID'];
 		}
+		return null;
 	}
 
-	function __construct(){		
+	function __construct(){
+		(new Db())->Log(json_encode($_REQUEST), $this->login(), json_encode(apache_request_headers()));	
 		$this->{$_SERVER['REQUEST_METHOD']}();
 	}
 	function __destruct(){
-
+		// TODO: What to do. What not to do? -Arastoo Amel!
 	}
 	function setData($data){
 		$this->data = $data;
 	}
 	function setRequest($request){
 		$this->request = $request;
+	}
+	function getAllRequests(){
+		return $this->request;
 	}
 	function getRequest($index){
 		return (isset($this->request[$index])?$this->request[$index]:null);
@@ -50,18 +58,23 @@ abstract class AController implements IController{
 		else echo $this->data;
 	}
 	function GET($Auth = false){
-		$this->setRequest($_GET);
 		if ($Auth)
 			$this->login();
+		
+		$this->setRequest($_GET);
 	}
 	function POST($Auth = false){
-		$this->setRequest($_POST);
 		if ($Auth)
 			$this->login();
+
+		$this->setRequest($_POST);
 	}
 	function DELETE($Auth = false){
+		if ($Auth)
+			$this->login();
+		
 		$raw_data = file_get_contents('php://input');
-		$_PUT = array();
+		$_DELETE = array();
 		$boundary = substr($raw_data, 0, strpos($raw_data, "\r\n"));
 		if ($boundary == null) // x-www-form-urlencoded
 		{
@@ -69,13 +82,12 @@ abstract class AController implements IController{
 
 			for($i = 0; $i < count($split_parameters); $i++) {
 				$final_split = explode('=', $split_parameters[$i]);
-				$_PUT[$final_split[0]] = $final_split[1];
+				$_DELETE[$final_split[0]] = $final_split[1];
 			}
 		}
 		else // form-data
 		{
 			$parts = array_slice(explode($boundary, $raw_data), 1);
-			$_DELETE = array();
 			foreach ($parts as $part) {
 				if ($part == "--\r\n") break; 
 				$part = ltrim($part, "\r\n");
@@ -108,10 +120,11 @@ abstract class AController implements IController{
 			}
 		}
 		$this->setRequest($_DELETE);
-		if ($Auth)
-			$this->login();
 	}
 	function PUT($Auth = false){
+		if ($Auth)
+			$this->login();
+
 		$raw_data = file_get_contents('php://input');
 		$_PUT = array();
 		$boundary = substr($raw_data, 0, strpos($raw_data, "\r\n"));
@@ -159,9 +172,6 @@ abstract class AController implements IController{
 			}
 		}
 		$this->setRequest($_PUT);
-
-		if ($Auth)
-			$this->login();
 	}
 }
 ?>

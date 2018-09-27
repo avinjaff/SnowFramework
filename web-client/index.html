@@ -24,7 +24,6 @@
     <link href="css/modal.css" rel="stylesheet" type="text/css" title="Default Style">
     <link rel="stylesheet" href="css/jstree.css" />
     <link rel="stylesheet" href="css/jstree.tayyebi.css" />
-    <link rel="stylesheet" href="css/leaflet.css" />
 
     <script charset="UTF-8" src="js/jquery.js"></script>
     <script charset="UTF-8" src="js/jquery.cookie.js"></script>
@@ -37,7 +36,6 @@
     <script charset="UTF-8" src="js/csvExport.js"></script>
     <script charset="UTF-8" src="js/persianDatepicker.js"></script>
     <script src="js/jstree.js"></script>
-    <script src="js/leaflet.js"></script>
     <script charset="UTF-8" src="js/Hi.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,14 +51,13 @@
 
     <nav class="side-bar">
       <ul>
-        <span>
-        گردرگ
-        </span>
+        <span>SNOWFRAMEWORK</span>
         <li onclick="Hi.load('dashboard');"><img src="img/dashboard.png" /><a>داشبورد</a></li>
         <li onclick="Hi.load('login');"><img src="img/login.png" /><a>احراز هویت</a></li>
-        <li onclick="Hi.load('register');"><img src="img/register.png" /><a>ثبت نام کاربر</a></li>
-        <li class="inactive"><a>دور فرمانی (فعال در موبایل)</a></li>
-        <span>
+        <span>مدیریت کاربران</span>
+        <li onclick="Hi.load('users');"><img src="img/register.png" /><a>مدیریت کاربران</a></li>
+        <li class="inactive"><a>منوی غیر فعال (برای تست)</a></li>
+        <li onclick="Hi.load('test');"><a>تست اتصال به پایگاه داده</a></li>
     </nav>
 
     <div id="myModal" class="modal">
@@ -84,7 +81,7 @@
     if (!Hi.auth())
       $(".side-bar").hide();
 
-    Hi.load('zone');
+    Hi.load('dashboard');
 
     $(window).on('load', function () {
       Hi.loading(false);
