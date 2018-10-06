@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 include_once 'IController.php';
 include_once 'Auth.php';
@@ -8,16 +10,30 @@ abstract class AController implements IController{
 	private $data = '' ;
 	private $request = [];
 
-	function login()
+	function login($Role = null)
 	{
+		if ($Role == 'GUEST')
+			return null;
+		
 		$query = [];
 		$parts = parse_url($_SERVER['REQUEST_URI']);
 		if (isset($parts['query']))
-		parse_str($parts['query'], $query);
+			parse_str($parts['query'], $query);
 		if (isset($query['Username']) && isset($query['Password']))
 		{
-			$_GET['_LOGGINID'] = (new Authentication())->IsValid($query['Username'], $query['Password']);
-			if ($_GET['_LOGGINID'] == null)
+			$LoginResult = (new Authentication())->IsValid($query['Username'], $query['Password']);
+			$_GET['_LOGGINID'] = $LoginResult[0];
+			if
+			(
+				($Role != null)
+				and
+				(
+					($Role != 'USER' and $Role != 'OPERATOR' and $Role != 'ADMIN') or
+					($_GET['_LOGGINID'] == null) or
+					($LoginResult[1] == 'USER' and $Role == 'OPERATOR') or
+					(($LoginResult[1] == 'USER' or $LoginResult[1] == 'OPERATOR') and $Role == 'ADMIN')
+				)
+			)
 			{
 				header("HTTP/1.1 401 Unauthorized");
 				exit;
@@ -54,21 +70,18 @@ abstract class AController implements IController{
 		}
 		else echo $this->data;
 	}
-	function GET($Auth = false){
-		if ($Auth)
-			$this->login();
-		
+	function GET($Role = 'GUEST'){
+		$this->login($Role);
+
 		$this->setRequest($_GET);
 	}
-	function POST($Auth = false){
-		if ($Auth)
-			$this->login();
+	function POST($Role = 'GUEST'){
+		$this->login($Role);
 
 		$this->setRequest($_POST);
 	}
-	function DELETE($Auth = false){
-		if ($Auth)
-			$this->login();
+	function DELETE($Role = 'GUEST'){
+		$this->login($Role);
 		
 		$raw_data = file_get_contents('php://input');
 		$_DELETE = array();
@@ -118,9 +131,8 @@ abstract class AController implements IController{
 		}
 		$this->setRequest($_DELETE);
 	}
-	function PUT($Auth = false){
-		if ($Auth)
-			$this->login();
+	function PUT($Role = 'GUEST'){
+		$this->login($Role);
 
 		$raw_data = file_get_contents('php://input');
 		$_PUT = array();

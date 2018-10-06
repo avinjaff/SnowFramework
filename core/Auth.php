@@ -10,7 +10,7 @@ class Authentication {
 
     public function IsValid($Username, $Password) {
 		$query  = "SELECT " 
-		. "`Id`, `HashPassword`"
+		. "`Id`, `HashPassword`, `Type`"
 		. " FROM `" . "Users"
 		. "` WHERE `IsActive`=1 AND `Username`='" . $Username . "';";
 		$db = new Db();
@@ -23,7 +23,7 @@ class Authentication {
 		{
 			$row = mysqli_fetch_assoc($result);
 			if ($this->CheckHash($Password, $row['HashPassword'])) {
-				return $row['Id'];
+				return [$row['Id'],$row['Type']];
 			}
 		}
 		return null;
