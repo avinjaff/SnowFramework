@@ -3,7 +3,7 @@ include_once 'IModel.php';
 
 abstract class AModel implements IModel
 {
-	private $props = ''; // props [0] = key, props [1] = value
+	private $props = []; // props [0] = key, props [1] = value
 	private $operands = []; // props that will go for update
 	private $table = ''; // table name in db
 	private $pk = 'Id'; // pk in table
@@ -67,7 +67,10 @@ abstract class AModel implements IModel
 				if (($key != $this->pk && $value == "✓")
 					|| $key == $this->pk)
 				{
-					$fields .= '`' . $key . '`, ';
+					if (substr($key, 0, 3) == "Bin")
+						$fields .= "TO_BASE64(`" . $key . "`) as " . $key . ", ";
+					else
+						$fields .= '`' . $key . '`, ';
 				}
 			}
 		}
@@ -100,7 +103,11 @@ abstract class AModel implements IModel
 			$values = mysqli_fetch_array($result);
 			foreach($this->GetProperties() as $key => $value)
 				if (isset($values[$key]))
+				{
+					// if (substr($key, 0, 3) == "Bin")
+					// 	$values[$key] = base64_encode($values[$key]);
 					$this->SetValue($key, $values[$key]);
+				}
 			// Return Single Record
 			return $this->GetProperties();
 		}
@@ -149,7 +156,9 @@ abstract class AModel implements IModel
 			else if ($this->IsReserved($key)
 				&& substr($key, 0, 3) == "Bin")
 			{
-				$value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
+				$value = "FROM_BASE64('" . explode(',', urldecode($value))[1] . "')";
+				// $value = "FROM_BASE64('" . $value . "')";
+				// $value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
 				// $value = "'" . base64_decode(explode(',', $value)[1]) . "'";
 			}
 			if (isset($value))
@@ -193,7 +202,8 @@ abstract class AModel implements IModel
 			else if ($this->IsReserved($key)
 				&& substr($key, 0, 3) == "Bin")
 			{
-				$value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
+				if ($value != null)
+					$value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
 				// $value = "'" . base64_decode(explode(',', $value)[1]) . "'";
 			}
 			if (isset($value))

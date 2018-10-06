@@ -3,7 +3,7 @@ Hi.auth(true);
 function users(){
     $('#search').flexdatalist({
         searchContain: false,
-        textProperty: '{Username}: {Fullname}',
+        textProperty: '{Username}',
         valueProperty: 'Username',
         minLength: 1,
         focusFirstResult: true,

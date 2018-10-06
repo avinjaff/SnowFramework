@@ -41,19 +41,18 @@ jQuery.each( [ "put", "delete" ], function( i, method ) {
         callback = data;
         data = undefined;
       }
+
       return jQuery.ajax({
         contentType:"application/json; charset=utf-8",
         url: url,
         type: method,
         dataType: type,
-        /* TODO: Attention */
-        data: data,
-        // data: decodeURI(data),
-        // data: decodeURIComponent(data),
+        data: decodeURI(data),
         success: callback
       });
     };
   });
+
 
 /*
 
@@ -63,8 +62,6 @@ https://stackoverflow.com/questions/951791/
 
 
 */
-
-
 
 window.onerror = function(msg, url, line, col, error) {
   var extra = !col ? '' : '\ncolumn: ' + col;
@@ -134,7 +131,6 @@ https://gist.github.com/oswaldoacauan/7580474
         ));
       });
     });
-
 
     return new Promise((resolve, reject) => {
     Promise.all(proms)
