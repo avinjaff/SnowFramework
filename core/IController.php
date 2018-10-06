@@ -8,10 +8,10 @@ interface IController{
 	function setData($Data);
 	function returnData();
 
-	function GET($Auth = false);
-	function POST($Auth = false);
-	function PUT($Auth = false);
-	function DELETE($Auth = false);
+	function GET($Role = 'GUEST');
+	function POST($Role = 'GUEST');
+	function PUT($Role = 'GUEST');
+	function DELETE($Role = 'GUEST');
 }
 
 ?>

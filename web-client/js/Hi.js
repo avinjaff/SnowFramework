@@ -69,14 +69,22 @@ Hi = {
         + "&Password=" + $.cookie("Password");
     },
     home(){
-        return "http://localhost/snowframework/controller";
+        return "http://localhost/GoldenRoseBackEnd/controller";
     },
-    auth(admin = false){
-        if ($.cookie("Username") == null || 
-            (admin && $.cookie("Type") != "ADMIN"))
+    auth(role){
+        if
+        (
+            (role != null)
+            &&
+            (
+                ($.cookie("Type") == undefined) ||
+                (role != 'USER' && role != 'OPERATOR' && role != 'ADMIN') ||
+                ($.cookie("Type") == 'USER' && role == 'OPERATOR') ||
+                (($.cookie("Type") == 'USER' || $.cookie("Type") == 'OPERATOR') && role == 'ADMIN')
+            )
+        )
         {
             Hi.message('شما به این بخش دسترسی ندارید', true);
-            // Hi.modal('شما به این بخش دسترسی ندارید');
             Hi.load('login');
             return false;
         }
