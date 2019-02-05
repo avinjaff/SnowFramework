@@ -1,0 +1,200 @@
+-گُرد
+en-US:Gord
+-سامانه‌ی مدیریت محتوی گرد
+en-US:Gord CMS
+-شناسه اصلی
+en-US:Master ID
+-شناسه عددی
+en-US:Numeric ID
+-خانه
+en-US:Home
+-ثبت
+en-US:Submit
+ku-IQ:
+-جستجو
+en-US:Search
+ku-IQ:
+-تماس با ما
+en-US:Contact-Us
+ku-IQ:
+-همراهان ما
+en-US:Our Partners
+ku-IQ:
+-دانلود
+en-US:Download
+-توضیح
+en-US:Description
+-یادداشت ها
+en-US:Notes
+ku-IQ:
+-واژگان کلیدی
+en-US:Keywords
+ku-IQ:
+-کلمه‌ی کلیدی
+en-US:Keyword
+ku-IQ:
+-دیدگاه
+en-US:Comment
+ku-IQ:
+-ارسال
+en-US:Send
+ku-IQ:
+-عنوان
+en-US:Title
+ku-IQ:
+-سریع
+en-US:Fast
+-فرم‌ساز
+en-US:Form Builder
+ku-IQ:
+-بالا
+en-US:Top
+ku-IQ:
+-متوسط
+en-US:Medium
+ku-IQ:
+-مرکز
+en-US:Center
+ku-IQ:
+-کند
+en-US:Slow
+ku-IQ:
+-پایین
+en-US:Bottom
+ku-IQ:
+-متن
+en-US:Body
+ku-IQ:
+-پرونده
+en-US:File
+ku-IQ:
+-به‌روز رسانی
+en-US:Update
+ku-IQ:
+-حذف
+en-US:Delete
+ku-IQ:
+-حذف پیوست
+en-US:Delete Attachement
+ku-IQ:
+-انصراف
+en-US:Cancel
+ku-IQ:
+-حساب کاربری
+en-US:Account
+ku-IQ:
+-افزودن فیلد
+en-US:Add Field
+-متن تک خط
+en-US:Single Line Text
+-متن چند خط
+en-US:Multiline Text
+-لیست آبشاری
+en-US:Drop Down List
+-دکمه‌های رادیویی
+en-US:Radio buttons
+-چک باکس
+en-US:Check Box
+-باکس تائید
+en-US:Agree Box
+-خروج
+en-US:Exit
+-تائید
+en-US:Apply
+ku-IQ:
+-پست
+en-US:Post
+ku-IQ:
+-پرونده‌ها
+en-US:Files
+ku-IQ:
+-ویرایش
+en-US:Edit
+ku-IQ:
+-ویرایش تم
+en-US:Edit theme
+ku-IQ:
+-ضمیمه
+en-US:Attachement
+ku-IQ:
+-اسم
+en-US:name
+-نام
+en-US:Firstname
+ku-IQ:
+-نام خانوادگی
+en-US:Lastname
+ku-IQ:
+-موضوع
+en-US:Subject
+ku-IQ:
+-نام کاربری
+en-US:Username
+ku-IQ:
+-کلمه‌ی عبور
+en-US:Password
+ku-IQ:
+-کلمه‌ی عبور قبلی نادرست است
+en-US:Wrong previous password
+-مشاهده پاسخ‌های قبلی
+en-US:Previous answers
+-ورود
+en-US:Enter
+ku-IQ:
+-تکرار
+en-US:Confirm
+ku-IQ:
+-تراکنش‌های مالی
+en-US:Payments
+-پیش نیاز
+en-US:Requrements
+-تغییر کلمه‌ی عبور
+en-US:Change Password
+-جعبه‌ی همه
+en-US:Everyone's box
+-فعالیت
+en-US:Activity
+-گذرواژه‌ی جدید
+en-US:New password
+ku-IQ:
+-پایگاه داده
+en-US:Database
+-گذرواژه‌ی قبلی
+en-US:Previous password
+ku-IQ:
+-لطفا پیش نیاز معتبر را ارسال فرمایید
+en-US:Please fill out the prerequested form
+-تصویر
+en-US:Image
+ku-IQ:
+-عضویت
+en-US:Regsiter
+ku-IQ:
+-فرایند با موفقیت اعمال شد
+en-US:Your request done successfuly
+-عبارت را وارد نمائید
+en-US:Enter the phrase
+ku-IQ:
+-نتیجه یافت نشد
+en-US:No result found
+ku-IQ:
+-پایگاه داده‌ی همه
+en-US:Everyone's Database
+-ویرایش نسخه‌ی اصلی
+en-US:Edit original
+ku-IQ:
+-به روز رسانی
+en-US:Update
+-جعبه
+en-US:Box
+-احراز هویت ناموفق
+en-us:Login failed
+-ذخیره
+en-US:Save
+-ویرایش فارسی
+en-US:Edit English
+ku-IQ:
+-کاربران
+en-US:Users
+
+-<?= $functionalitiesInstance->label("عبارت"); ?>

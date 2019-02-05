@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Main';
+    src: url('../fonts/Behdad-Regular.ttf');
+}
+* {
+    font-family: 'Main';
+}
