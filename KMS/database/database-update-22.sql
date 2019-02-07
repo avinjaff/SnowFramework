@@ -1,1 +1,0 @@
-drop view post_contents;

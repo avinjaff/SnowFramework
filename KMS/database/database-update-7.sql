@@ -1,1 +1,0 @@
-update `posts` set `MasterId` = cast(uuid() as char);
