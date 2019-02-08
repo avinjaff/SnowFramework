@@ -14,12 +14,12 @@ set_error_handler(function($errno, $errstr, $errfile, $errline ){
 
 
 // Get request info
+$BASEURL = Config::BASEURL;
 $URL = strtolower(Functionalities::IfExistsIndexInArray($_SERVER, "PATH_INFO"));
 $URL = '/'.trim($URL, '/');
 if ($URL == '/')
     $URL = "/home";
 $PATHINFO = explode('/', $URL);
-$controller = $PATHINFO[1];
 
 include_once BASEPATH.'public/plug-in/Translate.php';
 $Translate = new Translate();
@@ -33,14 +33,14 @@ $_SESSION['PHP_AUTH_USER'] = '';
 $_SESSION['PHP_AUTH_PWD'] = '';
 
 include_once BASEPATH.'public/plug-in/Links.php';
-$CSSLINKS = Links::GenerateCssLinks($URL, $CURRENTLANGUAGE, Config::BASEURL);
-$JSLINKS = Links::GenerateJsLinks($URL, $CURRENTLANGUAGE, Config::BASEURL);
+$CSSLINKS = Links::GenerateCssLinks($URL, $CURRENTLANGUAGE, $BASEURL);
+$JSLINKS = Links::GenerateJsLinks($URL, $CURRENTLANGUAGE, $BASEURL);
 
 include_once BASEPATH.'model/PostDetail.php';
 $PostDetail = new PostDetail();
 
 include_once BASEPATH.'public/master/public-header.php';
-include_once (BASEPATH.'public/'.$controller.'.php');
+include_once (BASEPATH.'public/'.$PATHINFO[1].'.php');
 include_once BASEPATH.'public/master/public-footer.php';
 
 ?>

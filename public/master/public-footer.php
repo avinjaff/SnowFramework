@@ -10,11 +10,6 @@
         <?php
         $rows = $PostDetail->Select(0, 2, "Submit", "DESC", "WHERE Level = 3");
         foreach ($rows as $row) {
-            if ($row['Level'] != '3')
-                continue;
-            $_GET['masterid'] = $row['MasterID'];
-            $_GET["level"] = '3';
-            $_GET["type"] = 'POST';
             include ('views/render.php');
         }
         ?>

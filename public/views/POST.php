@@ -6,45 +6,28 @@ if ($row['Type'] == "QUST")
     echo '</article>';
 }
 else
-switch ($_GET["level"])
+switch ($row["Level"])
 {
     case "view":
         echo '<article>';
-        $content = $row["Content"];
-        // $finfo = new finfo(FILEINFO_MIME);
-        // $type = $finfo->buffer($content);
-        // $size = strlen($content);
-        // $delimiters = array("/",";"," ","=");
-        // $ready = str_replace($delimiters, $delimiters[0], $type);
-        // $launch = explode($delimiters[0], $ready);
-        // $extension = $launch[1];
-        // $os = array("png", "jpg", "jpeg", "bmp", "gif");
-        // if (in_array($extension, $os)) {
-            echo '<img src="download.php?id=' . $row["Id"] . '" alt="' . $row["Title"] . '" />';
-        // }
-        // else if ($extension != "x-empty") {
-             echo '<a class="attachment" href="download.php?id=' . $row["Id"] . '">' . $Translate->Label("دانلود پیوست") . '</a>';
-        // }
-        include ('helper/post_edit.php');
+        echo '<img src="download.php?id=' . $row["ID"] . '" alt="' . $row["Title"] . '" />';
+        echo '<a class="attachment" href="download.php?id=' . $row["ID"] . '">' . $Translate->Label("دانلود پیوست") . '</a>';
+        include BASEPATH . 'public/helper/post_edit.php';
         echo '<h1>' . $row['Title'] . '</h1>';
         echo $Parsedown->text($row['Body']);
         echo '</article>';
         $rows=[];
-        $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'KWRD' AND `RefrenceId`='" . mysqli_real_escape_string($conn, Functionalities::IfExistsIndexInArray($_GET, 'id')) . "'");
+        $rows = $PostDetail->Select(-1, -1, "Submit", "DESC", "WHERE `Type` = 'KWRD' AND `RefrenceId`='" . Functionalities::IfExistsIndexInArray($row, 'Id') . "'");
         echo '<div class="keywords">';
         foreach ($rows as $row) {
-            $_GET['masterid'] = $row['MasterID'];
-            $_GET["type"] = 'KWRD';
-            include ('views/render.php');
+            include BASEPATH . 'public/views/render.php';
         }
         echo '</div>';
-        include ('helper/post_comment.php');
+        include BASEPATH . 'public/helper/post_comment.php';
         $rows=[];
-        $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'COMT' AND `RefrenceId`='" . mysqli_real_escape_string($conn, Functionalities::IfExistsIndexInArray($_GET, 'id')) . "'");
+        $rows = $PostDetail->Select(-1, -1, "Submit", "DESC", "WHERE `Type` = 'COMT' AND `RefrenceId`='" . Functionalities::IfExistsIndexInArray($row, 'Id') . "'");
         echo '<div class="comments">';
         foreach ($rows as $row) {
-            $_GET['masterid'] = $row['MasterID'];
-            $_GET["type"] = 'COMT';
             include ('views/render.php');
         }
         echo '</div>';
@@ -56,7 +39,7 @@ switch ($_GET["level"])
         echo '</a></li>';
         break;
     case "1":
-        echo '<a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">';
+        echo '<a href="' . $BASEURL . 'view/' . $row['Language'] . '/' . $row['MasterID'] . '">';
         echo '<img src="download.php?id=' . $row['MasterID'] . '" alt="' . $row["Title"] . '" >';
         echo '<h2>' . $row['Title'] . '</h2>';
         echo '<p>' . Text::GenerateAbstractForPost($Parsedown->text($row['Body']), 480)  . '</p>';
