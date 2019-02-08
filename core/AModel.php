@@ -1,7 +1,16 @@
 <?php
+
+/**
+ * Abstract Model class script
+ * Models must extend this class
+ *
+ * @author        MohammadReza Tayyebi <rexa@gordarg.com>
+ * @since         1.0
+ */
+
 include_once 'IModel.php';
 
-abstract class AModel implements IModel
+abstract class AModel
 {
 	private $props = []; // props [0] = key, props [1] = value
 	private $operands = []; // props that will go for update

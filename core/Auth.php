@@ -3,11 +3,6 @@ require_once '../core/Db.php';
 
 class Authentication {
 
-	function CheckHash($InputHash, $StoredHash)
-	{
-		return password_verify($InputHash, $StoredHash);
-	}
-
     public function IsValid($Username, $Password) {
 		$query  = "SELECT " 
 		. "`Id`, `HashPassword`, `Type`"

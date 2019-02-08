@@ -1,12 +1,22 @@
 <?php
+
+/**
+ * Abstract Controller class script
+ * Controllers must extend this class
+ * 
+ * @author        MohammadReza Tayyebi <rexa@gordarg.com>
+ * @since         1.0
+ */
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+include_once 'Init.php';
 include_once 'IController.php';
 include_once 'Auth.php';
 
-abstract class AController implements IController{
-
+abstract class AController
+{
 	private $data = '' ;
 	private $request = [];
 

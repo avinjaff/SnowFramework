@@ -1,10 +1,12 @@
 <?php
-
-// We need to extend almost everything from this class
+//TODO: We need to extend almost everything from this class
 class Xei{
 	function __construct(){
-		define(AUTHOR, 'MOHAMMAD REZA TAYYEBI');
-		define(SIGN, 'TAYYB');
+		// Major release number
+		// Minor release number
+		// Maintenance release number (bugfixes only)
+		// If used at all: build number (or source control revision number)
+		define(VERSION, '1.0.0.0');
 	}
 }
 ?>

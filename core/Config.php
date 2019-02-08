@@ -1,4 +1,13 @@
 <?php
+/**
+ * Config class script
+ * Sets hosting service variables
+ *
+ * @author        MohammadReza Tayyebi <rexa@gordarg.com>
+ * @since         1.0
+ */
+
+
 namespace core;
 
 class Config

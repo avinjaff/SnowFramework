@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Id` INT(11) NOT NULL AUTO_INCREMENT,
   `Username` VARCHAR(45) NULL DEFAULT NULL,
   `HashPassword` TINYTEXT NULL DEFAULT NULL,
-  `Active` BIT(1) NULL DEFAULT b'1',
+  `IsActive` BIT(1) NULL DEFAULT b'1',
   `Role` CHAR(5) NULL DEFAULT 'VSTOR',
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Username` (`Username` ASC))
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `Language` VARCHAR(5) NULL DEFAULT 'fa-IR',
   `RefrenceId` CHAR(36) NULL DEFAULT NULL,
   `Index` SMALLINT(6) NULL DEFAULT NULL,
-  `Deleted` BIT(1) NOT NULL DEFAULT b'0',
-  `ContentDeleted` BIT(1) NOT NULL DEFAULT b'0',
+  `IsDeleted` BIT(1) NOT NULL DEFAULT b'0',
+  `IsContentDeleted` BIT(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`, `MasterId`),
   INDEX `fk_posts_user_idx` (`UserId` ASC),
   CONSTRAINT `fk_posts_user`
@@ -81,4 +81,4 @@ CREATE OR REPLACE VIEW `post_contributers` AS select `P`.`MasterId` AS `MasterID
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `post_details`;
 -- USE `gordcms`;
-CREATE OR REPLACE VIEW `post_details` AS select `P`.`MasterId` AS `MasterID`,`P`.`Title` AS `Title`,`P`.`Id` AS `ID`,`P`.`Submit` AS `Submit`,`P`.`UserId` AS `UserID`,`U`.`Username` AS `Username`,`P`.`Body` AS `Body`,`P`.`Type` AS `Type`,`P`.`Level` AS `Level`,`P`.`RefrenceId` AS `RefrenceID`,`P`.`Index` AS `Index`,`P`.`Status` AS `Status`,`P`.`Language` AS `Language`,(case when ((select `P2`.`Submit` from `posts` `P2` where ((`P2`.`ContentDeleted` = 1) and (`P`.`MasterId` = `P2`.`MasterId`)) order by `P2`.`Submit` desc limit 1) > (select `P1`.`Submit` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1)) then NULL else (select `P1`.`BinContent` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1) end) AS `BinContent` from (`posts` `P` join `users` `U` on((`P`.`UserId` = `U`.`Id`))) where (`P`.`Id` in (select max(`posts`.`Id`) from `posts` group by `posts`.`MasterId`,`posts`.`Language`) and (`P`.`Deleted` = '0'));
+CREATE OR REPLACE VIEW `post_details` AS select `P`.`MasterId` AS `MasterID`,`P`.`Title` AS `Title`,`P`.`Id` AS `ID`,`P`.`Submit` AS `Submit`,`P`.`UserId` AS `UserID`,`U`.`Username` AS `Username`,`P`.`Body` AS `Body`,`P`.`Type` AS `Type`,`P`.`Level` AS `Level`,`P`.`RefrenceId` AS `RefrenceID`,`P`.`Index` AS `Index`,`P`.`Status` AS `Status`,`P`.`Language` AS `Language`,(case when ((select `P2`.`Submit` from `posts` `P2` where ((`P2`.`IsContentDeleted` = 1) and (`P`.`MasterId` = `P2`.`MasterId`)) order by `P2`.`Submit` desc limit 1) > (select `P1`.`Submit` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1)) then NULL else (select `P1`.`BinContent` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1) end) AS `BinContent` from (`posts` `P` join `users` `U` on((`P`.`UserId` = `U`.`Id`))) where (`P`.`Id` in (select max(`posts`.`Id`) from `posts` group by `posts`.`MasterId`,`posts`.`Language`) and (`P`.`IsDeleted` = '0'));
