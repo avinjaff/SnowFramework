@@ -2,40 +2,32 @@
 
 class Links
 {
-    public static function GenerateCssLinks($BASEURL)
+    public static function GenerateCssLinks($URL, $CURRENTLANGUAGE, $BASEURL)
     {
-        // include_once $parent . '/meta/render.php';
-        // $c = 1 + count(explode('/', config::Url_PATH));
-        // $c -= count(explode('.', config::Url_SUBDOMAIN)); // TODO: BUG: dots in address has some problems; eg -> www. | .com
-        // $items =  explode('/',preg_replace("/[^a-zA-Z0-9_\-\/اآبپتثجچحخدذرزسشصضطظعغفقکگلمنوهی]/","-",str_replace("://", "/", str_replace("?", "/", $BASEURL))));
-        // for ($i= $c + 1 ; $i < count($items); $i++ )
-        // {
-        //   echo '
-        //   <link href="' . $npath . '/css';
-        //     if ($i == $c + 1)
-        //   echo '/master';
-        //   else
-        //   for ($j= $c + 2; $j <= $i; $j++ )
-        //   echo '/' . (($items[$j] == "")?"index-php":$items[$j]);
-        //     echo '.css" rel="stylesheet" />';
-        // }
-        // echo '<link href="' . $npath . '/css/' . $CURRENTLANGUAGE . '.css" rel="stylesheet" />';
-        return "";
+        $items = explode('/',preg_replace("/[^a-zA-Z0-9_\-\/اآبپتثجچحخدذرزسشصضطظعغفقکگلمنوهی]/","-",$URL));
+        $output = '';
+        for ($i = 1 ; $i < count($items); $i++ )
+        {
+            $folders = '';
+            for ($j = 0 ; $j < $i ; $j ++)
+                $folders = $folders . $items[$j] . '/' ;
+            $output = $output . '<link rel="stylesheet" type="text/css" href="' . $BASEURL . 'public/css' . $folders . $items[$i] . '.css">';
+        }
+        return $output;
     }
 
-    public static function GenerateJsLinks($BASEURL)
+    public static function GenerateJsLinks($URL, $CURRENTLANGUAGE, $BASEURL)
     {
-        // for ($i=1 + $c; $i < count($items); $i++ )
-        // {
-        //     echo '<script type="text/javascript" src="' . $npath . '/js';
-        //     if ($i == 1 + $c)
-        //     echo '/master';
-        //     else
-        //         for ($j=2 + $c; $j <= $i; $j++ )
-        //             echo '/' . (($items[$j] == "")?"index-php":$items[$j]);
-        //     echo '.js" ></script>';
-        // }
-        return "test.js";
+        $items = explode('/',preg_replace("/[^a-zA-Z0-9_\-\/اآبپتثجچحخدذرزسشصضطظعغفقکگلمنوهی]/","-",$URL));
+        $output = '';
+        for ($i = 1 ; $i < count($items); $i++ )
+        {
+            $folders = '';
+            for ($j = 0 ; $j < $i ; $j ++)
+            $folders = $folders . $items[$j] . '/' ;
+            $output = $output . '<script src="' . $BASEURL . 'public/js' . $folders . $items[$i] . '.js"></script>';
+        }
+        return $output;
     }
 
 }

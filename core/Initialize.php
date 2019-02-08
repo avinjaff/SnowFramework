@@ -8,10 +8,6 @@
  */
 
 
-/**
- * TimeZone
- */
-
 define("DATETIMENOW", date('Y-m-d h:i:s.u', time()));
 define("BASEPATH", str_replace('\\','/',realpath(dirname(__FILE__) . '/..') .'/'));
 if (session_status() == PHP_SESSION_NONE) 
@@ -21,10 +17,15 @@ function __autoload($class_name) {
     /**
      * Custom Exceptions
      */
+
+
     require_once BASEPATH."core/Exception.php";
-    set_error_handler(function($errno, $errstr, $errfile, $errline ){
-        throw new MyException($errstr, $errno);
-    });
+    // TODO:
+    // set_error_handler(function($errno, $errstr, $errfile, $errline ){
+    //     throw new MyException($errstr, $errno);
+    // });
+
+
     /**
      * Cofiguration variables
      * These variables are defined by user

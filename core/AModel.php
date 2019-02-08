@@ -115,31 +115,11 @@ abstract class AModel
 			header("HTTP/1.0 404 Not Found");
 			return;
 		}
-		/*
-		$num = mysqli_num_rows($result);
-		if ($num == 1)
-		{
-			$i=0;
-			$fields = '';
-			$values = mysqli_fetch_array($result);
-			foreach($this->GetProperties() as $key => $value)
-				if (isset($values[$key]))
-				{
-					$this->SetValue($key, $values[$key]);
-				}
-			return $this->GetProperties();
+		$rows = array();
+		while(($row = mysqli_fetch_array($result))) {
+			$rows[] = $row;
 		}
-		else if ($num > 1)
-		{
-		*/
-			$rows = array();
-			while(($row = mysqli_fetch_array($result))) {
-				$rows[] = $row;
-			}
-			return $rows;
-		/*
-		}
-		*/
+		return $rows;
 	}
 	function Delete()
 	{

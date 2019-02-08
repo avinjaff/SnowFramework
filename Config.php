@@ -26,8 +26,7 @@ class Config
     const ConnectionString_USERNAME  = "root";
     const ConnectionString_PASSWORD = "123";
 
-    const Url_PATH = "/CMS"; //       /Anything
-    const Url_SUBDOMAIN = ""; //      Anything.
+    const BASEURL = "http://localhost/SnowFramework/"; //       /Anything
     const TITLE = "سامانه‌ی مدیریت دانش";
     const LANGUAGE = "Farsi";
     const REGION = "IR";
