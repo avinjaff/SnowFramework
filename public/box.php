@@ -15,17 +15,17 @@ $post = new Posts($conn);
 $rows=[];
 use core\functionalities;
 $functionalitiesInstance = new functionalities();
-if ($functionalitiesInstance->ifexistsidx($_GET, 'id') == "" && $user->GetRoleById($functionalitiesInstance->ifexistsidx($_SESSION, 'PHP_AUTH_ID')) == 'ADMIN')
+if (Functionalities::IfExistsIndexInArray($_GET, 'id') == "" && $user->GetRoleById(Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_ID')) == 'ADMIN')
 {
     $rows = $post->
     ToList(-1, -1, "Submit", "DESC",
     "WHERE `Type`='FILE'");
 }
-else if ($functionalitiesInstance->ifexistsidx($_GET, 'id') != "")
+else if (Functionalities::IfExistsIndexInArray($_GET, 'id') != "")
 {
     $rows = $post->
     ToList(-1, -1, "Submit", "DESC",
-    "WHERE `UserID` = '" . $functionalitiesInstance->ifexistsidx($_GET, 'id') . "' AND `Type`='FILE'");
+    "WHERE `UserID` = '" . Functionalities::IfExistsIndexInArray($_GET, 'id') . "' AND `Type`='FILE'");
 }
 
 /*

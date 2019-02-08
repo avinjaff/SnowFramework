@@ -19,6 +19,13 @@ if (session_status() == PHP_SESSION_NONE)
 
 function __autoload($class_name) {
     /**
+     * Custom Exceptions
+     */
+    require_once BASEPATH."core/Exception.php";
+    set_error_handler(function($errno, $errstr, $errfile, $errline ){
+        throw new MyException($errstr, $errno);
+    });
+    /**
      * Cofiguration variables
      * These variables are defined by user
      */
@@ -27,6 +34,11 @@ function __autoload($class_name) {
      * Set time zone
      */
     date_default_timezone_set(Config::TimeZone);
+    /**
+     * Set Default Language
+     */
+    if (!isset($_COOKIE["LANG"]))
+        setcookie('LANG', 'en-US', time() + (86400 * 30), '/');
     /**
      * Optimized functions
      */

@@ -10,7 +10,8 @@
 
 // Improve Data Structure to support validation messages and more complicated Data Types
 
-include_once 'IModel.php';
+include_once 'Initialize.php';
+include_once BASEPATH . 'core/Database.php';
 
 abstract class AModel
 {
@@ -20,6 +21,7 @@ abstract class AModel
 	private $pk = 'Id'; // pk in table
 	private $pkType = 'Int'; // pk in table
 	private $propscount = ''; // how many props passed to methods?
+	private $readonly = ''; // commonly used for views
 
 	function IsReserved($Field, $IgnoreAggregate = false)
 	{
@@ -34,7 +36,9 @@ abstract class AModel
 	{
 		return password_hash($InputString, PASSWORD_DEFAULT);
 	}
-
+	function SetReadOnly($ReadOnly){
+		$this->$readonly = $ReadOnly;
+	}
 	function SetValue($Key, $Value){
 		$this->props[$Key] = $Value;
 	}
@@ -134,6 +138,7 @@ abstract class AModel
 	}
 	function Delete()
 	{
+		if ($this->readonly) return;
 		$this->Select();
 		$db = new Db();
 		$conn = $db->Open();
@@ -142,6 +147,7 @@ abstract class AModel
 	}
 	function Update($previousId)
 	{
+		if ($this->readonly) return;
 		$db = new Db();
 		$conn = $db->Open();
 		$query  = "UPDATE `" . $this->table . "` SET ";
@@ -187,6 +193,7 @@ abstract class AModel
 	}
 	function Insert()
 	{
+		if ($this->readonly) return;
 		$db = new Db();
 		$conn = $db->Open();
 		$query  = "INSERT INTO `" . $this->table . "` (";

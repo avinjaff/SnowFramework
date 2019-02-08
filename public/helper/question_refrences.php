@@ -11,9 +11,9 @@ require_once 'semi-orm/Posts.php';
 use orm\Posts;
 $post = new Posts($conn);
 $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'QUST'");
-echo '<label for="refrenceid">' . $functionalitiesInstance->label("پیش نیاز") . '</label>';
+echo '<label for="refrenceid">' . $Translate->Label("پیش نیاز") . '</label>';
 echo '<select class="refrenceid" name="refrenceid">';
-echo '<option selected="selected">' . $functionalitiesInstance->label("هیچکدام") . '</option>';
+echo '<option selected="selected">' . $Translate->Label("هیچکدام") . '</option>';
 foreach ($rows as $row) {
         echo '<option value="' . $row['MasterID'] . '">' . $row['Title'] . '</option>';
 }

@@ -14,7 +14,7 @@
     {
         $type = mysqli_real_escape_string($conn, $_POST['type']);
         $body = $_POST['body'];
-        $title = ($functionalitiesInstance->ifexistsidx($_POST, 'title') == NULL) ? "NULL" : "'" . mysqli_real_escape_string($conn, ($_POST['title'])) . "'";
+        $title = (Functionalities::IfExistsIndexInArray($_POST, 'title') == NULL) ? "NULL" : "'" . mysqli_real_escape_string($conn, ($_POST['title'])) . "'";
         if ($type  == "KWRD")
         {
             $title = "'#" . substr($title, 1);
@@ -80,13 +80,13 @@
                 ["Submit", "'" . mysqli_real_escape_string($conn, $_POST['submit']) . "'"],
                 ["Type", "'" . $type . "'"],
                 ["Language", "'" . mysqli_real_escape_string($conn, $_POST['language']) . "'"],
-                ["Level", ($functionalitiesInstance->ifexistsidx($_POST, 'level') == NULL) ? "NULL" : "'" . mysqli_real_escape_string($conn, ($_POST['level'])) . "'"],
+                ["Level", (Functionalities::IfExistsIndexInArray($_POST, 'level') == NULL) ? "NULL" : "'" . mysqli_real_escape_string($conn, ($_POST['level'])) . "'"],
                 ["Body", "'" . $body . "'"],
                 ["UserId", mysqli_real_escape_string($conn, $_POST['userid'])],
                 ["ContentDeleted", "0"],
                 ["Status", "'" . $status . "'"],
-                ["RefrenceId", ($functionalitiesInstance->ifexistsidx($_POST, 'refrenceid') == NULL) ? "NULL" : "'" . mysqli_real_escape_string($conn, ($_POST['refrenceid'])) . "'"],
-                ["Index", mysqli_real_escape_string($conn, (($functionalitiesInstance->ifexistsidx($_POST, 'index') == NULL) ? "NULL" : $_POST['index']))],
+                ["RefrenceId", (Functionalities::IfExistsIndexInArray($_POST, 'refrenceid') == NULL) ? "NULL" : "'" . mysqli_real_escape_string($conn, ($_POST['refrenceid'])) . "'"],
+                ["Index", mysqli_real_escape_string($conn, ((Functionalities::IfExistsIndexInArray($_POST, 'index') == NULL) ? "NULL" : $_POST['index']))],
                 ["Deleted", "0"],
             ]);
     }

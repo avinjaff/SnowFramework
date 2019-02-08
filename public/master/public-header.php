@@ -1,136 +1,42 @@
-<?php
-include_once 'variable/config.php';
-use core\config;
-include ('core/init.php');
-?>
 <!DOCTYPE html>
 <!--
-CMS by
-                                                `..`                                                
-                                              `.    .`                                              
-                                            `.        .`                                            
-                                          `.            .`                                          
-                                        `.                .`         `                              
-                                      `.                    .`       ..`                            
-                                    `.                        .`     .  .`                          
-                                  `.                            .`  ``   ``                         
-                                `.                                .`.     `.                        
-                              `.                                   .`      `.                       
-                            `.                                    ``        `.                      
-                          `.                                     ``          ``                     
-                        `.`                                     .`            .                     
-                      `.`                                     ``              `.                    
-                    ```    ``````````                       ```                .                    
-                  ```  `````         `````               ````                  .``                  
-                ``` ````                ``````````````````                     . ```                
-              ``` ```                        ````````                          .   ```              
-            ```  ``                                                            .     ```            
-          ```   .`                                                             :       ```          
-        ```    .`                                                              /         ```        
-      ```     `.                                                              `:           ```      
-    ```       .                                                               -.             ```    
-  ```         .                                                              .-`               ```  
-```           .                                                             `..                  ```
-:`            :`                                                           `..                    `:
-.```          .-                                                          ...`                  ```.
-.  `.`        `-.                                                        ...`                 ```  .
-.    `.`       .`.                                                     `.`.`                ```    .
-.      `.`      .`.`                                                 `.``.                ```      .
-.        `.`     .``..                                             `.. .`               ```        .
-.          `.`    `. `..`                                        ..` `.               ```          .
-.            `.`    ``` `..`                                  ...  ``               ```            .
-.              `.`    ```  `...`                          ....  ```               `.`              .
-.`               `.`     ````  `......`           `......`   ```                `.`               `.
-` .`               `.`      `````      `..........`     `````                 `.`               `. `
--.` .`               `.`         ```````````````````````                    `.`               `.  `-
-. `.` .`               `.`                                                ```               `.  `` .
-.   `.` .`               `.`                                            ```               `.  ``   .
-.     `.` .`               `.`                                        ```               `. ```     .
-.       ``` .`               `.`                                    ```               `.  ``       .
-.         ``` ``               `.`                                ```               `.  ``         .
-.           ``` .`               `.`                            ```               `` ```           .
-.             ``` .`               ```                        ```               `.  ``             .
-.               ``` .`               ```                    ```               ``  ``               .
-```               ``` .`               ```                ```               ``  ``               ```
-  ```               ``` .`               ```            ```               `.` ``               ```  
-    ```               `` `.`               ```        ```               `.` ``               ```    
-      ```               `` `.`               ```    ```               `.` ``               ```      
-        ```               `` `.`               ``````               `.` ``               ```        
-          ```               `` `.`               ..               `.` ``               ```          
-            ```               `` `.`             ``             `.` ``               ```            
-              ```               `` ```           ``           `.` ``               ```              
-                ```               `` ```         ``         ``` ``               ```                
-                  ```               `` ```       ``       ``` ``               ```                  
-                    ```               `` ```     ``     `.` ``               ```                    
-                      ```               `` ```   ``   ``` ``               ```                      
-                        ``                `` ``` `` ``` ``                ``                        
-                          ``                `` ``..`` ``                ``                          
-                            ``                `` `` ``                ``                            
-                              `.                ````                ``                              
-                                ``               `.               .`                                
-                                  ``             ``             ``                                  
-                                    `.           ``           ``                                    
-                                      `.         ``         ``                                      
-                                        `.       ``       .`                                        
-                                          `.     ``     .`                                          
-                                            `.   ``   .`                                            
-                                              `. `` .`                                              
-                                                `.-`                                                
--->
+  - SnowKMS
+  - Made in IRAN
+  -->
 <html>
 <head>
-<title><?php echo $functionalitiesInstance->label(config::TITLE) ?></title>
+<title><?php echo $Translate->Label(Config::TITLE) ?></title>
 <link rel="icon" href="favicon.png" type="image/png" sizes="96x96">
-<?php
-
-$_GET['yeild'] = basename($_SERVER["SCRIPT_FILENAME"], ".php");
-include_once $parent . '/meta/render.php';
-$c = 1 + count(explode('/', config::Url_PATH));
-$c -= count(explode('.', config::Url_SUBDOMAIN)); // TODO: BUG: dots in address has some problems; eg -> www. | .com
-$items =  explode('/',preg_replace("/[^a-zA-Z0-9_\-\/اآبپتثجچحخدذرزسشصضطظعغفقکگلمنوهی]/","-",str_replace("://", "/", str_replace("?", "/", $path))));
-for ($i= $c + 1 ; $i < count($items); $i++ )
-{
-  echo '
-  <link href="' . $npath . '/css';
-	if ($i == $c + 1)
-  echo '/master';
-  else
-  for ($j= $c + 2; $j <= $i; $j++ )
-  echo '/' . (($items[$j] == "")?"index-php":$items[$j]);
-	echo '.css" rel="stylesheet" />';
-}
-echo '<link href="' . $npath . '/css/' . $functionalitiesInstance->ifexistsidx($_COOKIE, 'LANG') . '.css" rel="stylesheet" />';
-?>
+<? echo $CSSLINKS ?>
 </head>
 <body>
-  <?php include ('helper/menu.php'); ?>
+  <?php include ('public/helper/menu.php'); ?>
   
 	<header role="banner">
     <div class="sidebar-open" onclick="w3_open()">☰</div>
-    <?= $functionalitiesInstance->label(config::NAME) ?>
+    <?= $Translate->Label(config::NAME) ?>
     <?php
-    include ('helper/toolbar.php');
-    include ('helper/choose_language.php');
+    include ('public/helper/choose_language.php');
     ?>
 	</header>
 
 <div class="container">
 <?php
-  switch ($functionalitiesInstance->ifexistsidx($_GET, 'message'))
+  switch (Functionalities::IfExistsIndexInArray($_GET, 'message'))
   {
     case '✓':
       echo '<span class="message">';
-      echo  $functionalitiesInstance->label('فرایند با موفقیت اعمال شد');
+      echo  $Translate->Label('فرایند با موفقیت اعمال شد');
       echo '</span>';
       break;
     case '⎗':
       echo '<span class="message">';
-      echo  $functionalitiesInstance->label('لطفا پیش نیاز معتبر را ارسال فرمایید');
+      echo  $Translate->Label('لطفا پیش نیاز معتبر را ارسال فرمایید');
       echo '</span>';
       break;
     case '⊥':
       echo '<span class="message">';
-      echo  $functionalitiesInstance->label('کلمه‌ی عبور قبلی نادرست است');
+      echo  $Translate->Label('کلمه‌ی عبور قبلی نادرست است');
       echo '</span>';
       break;
   }

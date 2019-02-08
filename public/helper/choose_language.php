@@ -1,5 +1,5 @@
 <?php
-foreach ($config->languages as $lang)
+foreach (Config::Languages() as $lang)
 {
     echo '<a href="language.php?L=' . $lang->code . '-' . $lang->region . '"> &nbsp;' . $lang . ' &nbsp; </a>';
 }

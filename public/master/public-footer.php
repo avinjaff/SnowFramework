@@ -1,17 +1,11 @@
-<?php
-include_once 'variable/config.php';
-use core\config;
-require_once 'semi-orm/Posts.php';
-use orm\Posts;
-?>
 </div>
 <footer>
 	<div>
-		<h3><?= $functionalitiesInstance->label("همراهان ما"); ?></h3>
+		<h3><?= $Translate->Label("همراهان ما"); ?></h3>
 		<p><?php echo config::SPONSOR ?></p>
 	</div>
 	<div>
-		<h3><?= $functionalitiesInstance->label("یادداشت ها"); ?></h3>
+		<h3><?= $Translate->Label("یادداشت ها"); ?></h3>
 		<ul>
         <?php
         $rows = (new Posts($conn))->ToList(0, 2, "Submit", "DESC", "WHERE Level = 3");
@@ -27,7 +21,7 @@ use orm\Posts;
         </ul>
 	</div>
 	<div>
-		<h3><?= $functionalitiesInstance->label("واژگان کلیدی"); ?></h3>
+		<h3><?= $Translate->Label("واژگان کلیدی"); ?></h3>
         <?php
         $keywords = //file_get_contents('./keywords.txt', FILE_USE_INCLUDE_PATH);
         config::META_KEYWORDS;
@@ -39,17 +33,6 @@ use orm\Posts;
 	</div>
 </footer>
 </div>
-<?php
-for ($i=1 + $c; $i < count($items); $i++ )
-{
-    echo '<script type="text/javascript" src="' . $npath . '/js';
-    if ($i == 1 + $c)
-    echo '/master';
-    else
-        for ($j=2 + $c; $j <= $i; $j++ )
-            echo '/' . (($items[$j] == "")?"index-php":$items[$j]);
-	echo '.js" ></script>';
-}
-?>
+<?php $JSLINKS ?>
 </body>
 </html>

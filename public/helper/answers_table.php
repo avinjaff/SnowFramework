@@ -7,14 +7,14 @@ $UserId = $authentication->login('answers_table.php');
 if ($UserId == null)
         return;
 echo '<table><tbody><tr><th></th><th>' . 
-$functionalitiesInstance->label("تاریخ") . 
+$Translate->Label("تاریخ") . 
 '</th><th>' .
-$functionalitiesInstance->label("فرستنده") .
+$Translate->Label("فرستنده") .
 '</th><th>' .
-$functionalitiesInstance->label("وضعیت") . 
+$Translate->Label("وضعیت") . 
 '</th></tr>';
 $rowws=[];
-$rowws = $post->ToList(-1, -1, "Status", "DESC", "WHERE `Type` = 'ANSR' AND `RefrenceId`='" . mysqli_real_escape_string($conn, $functionalitiesInstance->ifexistsidx($_GET, 'id')) . "'");
+$rowws = $post->ToList(-1, -1, "Status", "DESC", "WHERE `Type` = 'ANSR' AND `RefrenceId`='" . mysqli_real_escape_string($conn, Functionalities::IfExistsIndexInArray($_GET, 'id')) . "'");
 foreach ($rowws as $roww) {
         echo '<tr>';
         echo '<td>';

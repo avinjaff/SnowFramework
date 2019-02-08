@@ -13,9 +13,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-include_once 'Init.php';
-include_once 'IController.php';
-include_once 'Auth.php';
+include_once 'Initialize.php';
+include_once BASEPATH . 'core/Auth.php';
 
 abstract class AController
 {

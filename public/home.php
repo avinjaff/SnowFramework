@@ -1,14 +1,9 @@
 <?php
-require_once ('core/Initialize.php');
-include ('master/public-header.php');
-require_once 'semi-orm/Posts.php';
-use orm\Posts;
-require_once 'core/functionalities.php';
-use core\functionalities;
+include_once BASEPATH.'model/PostDetail.php';
 $rows=[];
-$rows = (new Posts($conn))->
-    ToList(0, 48, "Submit", "DESC",
-    "WHERE (`Level` = 1 OR `Level` = 2) AND `LANGUAGE`='" . $functionalitiesInstance->ifexistsidx($_COOKIE, 'LANG')  . "'");
+$rows = (new PostDetail($conn))->
+    Select(0, 48, "Submit", "DESC",
+    "WHERE (`Level` = 1 OR `Level` = 2) AND `LANGUAGE`='" . $CURRENTLANGUAGE  . "'");
 
 foreach ($rows as $row) {
     if ($row['Level'] != '1')
@@ -29,5 +24,4 @@ foreach ($rows as $row) {
         break;
 }
 
-include ('master/public-footer.php');
 ?>

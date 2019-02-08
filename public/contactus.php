@@ -13,16 +13,16 @@ mail($to, $subject, $message, $headers);
 }
 ?>
 <form action="contactus.php" method="post">
-  <label for="name"><?= $functionalitiesInstance->label("نام"); ?></label>
+  <label for="name"><?= $Translate->Label("نام"); ?></label>
   <input type="text" id="name" name="name" >
-  <label for="email"><?= $functionalitiesInstance->label("ایمیل"); ?></label>
+  <label for="email"><?= $Translate->Label("ایمیل"); ?></label>
   <input type="email" id="email" name="email">
-  <label for="subject"><?= $functionalitiesInstance->label("موضوع"); ?></label>
+  <label for="subject"><?= $Translate->Label("موضوع"); ?></label>
   <input type="text" id="subject" name="subject">
-  <label for="text"><?= $functionalitiesInstance->label("متن"); ?></label>
+  <label for="text"><?= $Translate->Label("متن"); ?></label>
   <textarea id="text" name="text" ></textarea>
 
-  <input name="send" type="submit" value="<?= $functionalitiesInstance->label("ارسال"); ?>">
+  <input name="send" type="submit" value="<?= $Translate->Label("ارسال"); ?>">
 </form>
 <?php
 include_once ('master/public-footer.php');

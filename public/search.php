@@ -8,11 +8,11 @@ use orm\Posts;
 require_once  $parent . '/plug-in/Parsedown.php';
 $functionalitiesInstance = new functionalities();
 $Parsedown = new Parsedown();
-$Q = $functionalitiesInstance->ifexistsidx($_GET,'Q');
+$Q = Functionalities::IfExistsIndexInArray($_GET,'Q');
 ?>
 <form class="example" method="GET" action="search.php">
-    <input type="text" name="Q" placeholder="<?= $functionalitiesInstance->label("عبارت را وارد نمائید"); ?>" value="<?= $Q ?>" />
-    <input type="submit" value = "<?= $functionalitiesInstance->label("جستجو"); ?>" />
+    <input type="text" name="Q" placeholder="<?= $Translate->Label("عبارت را وارد نمائید"); ?>" value="<?= $Q ?>" />
+    <input type="submit" value = "<?= $Translate->Label("جستجو"); ?>" />
 </form>
 <?php
 if ($Q != null)
@@ -85,7 +85,7 @@ if ($Q != null)
         }
     }
     else{
-        echo $functionalitiesInstance->label("نتیجه یافت نشد");
+        echo $Translate->Label("نتیجه یافت نشد");
     }
 }
 ?>

@@ -19,18 +19,18 @@ if (isset($_POST['login']))
 }
 include_once ('master/public-header.php');   
 if (isset($_POST['login']))
-    echo '<div class="message">' . $functionalitiesInstance->label("احراز هویت ناموفق") . '</div>';
+    echo '<div class="message">' . $Translate->Label("احراز هویت ناموفق") . '</div>';
 ?>
 <form action="login.php" method="post">
     <img src="variable/logo.svg" alt="logo" class="avatar">
 
-    <label for="user"><?= $functionalitiesInstance->label("نام کاربری"); ?></label>
+    <label for="user"><?= $Translate->Label("نام کاربری"); ?></label>
     <input type="text" name="user" required>
 
-    <label for="pass"><?= $functionalitiesInstance->label("کلمه‌ی عبور"); ?></label>
+    <label for="pass"><?= $Translate->Label("کلمه‌ی عبور"); ?></label>
     <input type="password" name="pass" required>
 
-    <button type="submit" name="login" ><?= $functionalitiesInstance->label("ورود"); ?></button>
-    <a href="index.php"><?= $functionalitiesInstance->label("انصراف"); ?></a>
+    <button type="submit" name="login" ><?= $Translate->Label("ورود"); ?></button>
+    <a href="index.php"><?= $Translate->Label("انصراف"); ?></a>
 </form>
 <?php include_once ('master/public-footer.php'); ?> 

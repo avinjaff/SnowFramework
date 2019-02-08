@@ -1,10 +1,7 @@
 <?php
+include_once BASEPATH . 'core/AModel.php';
 
-require_once '../core/Init.php';
-include('../core/AModel.php');
-require_once '../core/Db.php';
-
-class User extends AModel
+class Post extends AModel
 {
 
 	function __construct()

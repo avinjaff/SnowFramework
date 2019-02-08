@@ -1,12 +1,9 @@
 <?php
 namespace core;
 
-require_once 'Authorization.php';
-use core\Authorization;
-require_once '../Config.php';
-use core\Config;
-require_once 'Cryptography.php';
-use core\Cryptography;
+require_once BASEPATH . 'core/Authorization.php';
+require_once BASEPATH . 'Config.php';
+require_once BASEPATH . 'core/Cryptography.php';
 
 class Authentication{
 
@@ -18,8 +15,8 @@ class Authentication{
         if ($username == null)
         {
             $functionalitiesInstance = new functionalities();
-            $this->authUsername = $functionalitiesInstance->ifexistsidx($_SESSION, 'PHP_AUTH_USER');
-            $this->authPassword = $functionalitiesInstance->ifexistsidx($_SESSION, 'PHP_AUTH_PW');
+            $this->authUsername = Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_USER');
+            $this->authPassword = Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_PW');
         }
         else
         {
@@ -54,7 +51,7 @@ class Authentication{
                 if ($path == (config::Url_PATH . "/" . 'post.php'))
                 {
                     $functionalitiesInstance = new functionalities();
-                    $path = $path . '|' . $functionalitiesInstance->ifexistsidx($_GET, 'type');
+                    $path = $path . '|' . Functionalities::IfExistsIndexInArray($_GET, 'type');
                     if ($authorization->validate($path, $login["Role"]))
                         return $login;
                 }

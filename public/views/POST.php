@@ -23,14 +23,14 @@ switch ($_GET["level"])
             echo '<img src="download.php?id=' . $Id . '" alt="' . $row["Title"] . '" />';
         // }
         // else if ($extension != "x-empty") {
-             echo '<a class="attachment" href="download.php?id=' . $Id . '">' . $functionalitiesInstance->label("دانلود پیوست") . '</a>';
+             echo '<a class="attachment" href="download.php?id=' . $Id . '">' . $Translate->Label("دانلود پیوست") . '</a>';
         // }
         include ('helper/post_edit.php');
         echo '<h1>' . $row['Title'] . '</h1>';
         echo $Parsedown->text($row['Body']);
         echo '</article>';
         $rows=[];
-        $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'KWRD' AND `RefrenceId`='" . mysqli_real_escape_string($conn, $functionalitiesInstance->ifexistsidx($_GET, 'id')) . "'");
+        $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'KWRD' AND `RefrenceId`='" . mysqli_real_escape_string($conn, Functionalities::IfExistsIndexInArray($_GET, 'id')) . "'");
         echo '<div class="keywords">';
         foreach ($rows as $row) {
             $_GET['masterid'] = $row['MasterID'];
@@ -40,7 +40,7 @@ switch ($_GET["level"])
         echo '</div>';
         include ('helper/post_comment.php');
         $rows=[];
-        $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'COMT' AND `RefrenceId`='" . mysqli_real_escape_string($conn, $functionalitiesInstance->ifexistsidx($_GET, 'id')) . "'");
+        $rows = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'COMT' AND `RefrenceId`='" . mysqli_real_escape_string($conn, Functionalities::IfExistsIndexInArray($_GET, 'id')) . "'");
         echo '<div class="comments">';
         foreach ($rows as $row) {
             $_GET['masterid'] = $row['MasterID'];

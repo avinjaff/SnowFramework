@@ -1,8 +1,5 @@
 <?php
-
-namespace core;
-require_once 'variable/config.php';
-use core\config;
+require_once 'Config.php';
 
 class AccessLevel {
 

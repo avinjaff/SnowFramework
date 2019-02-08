@@ -197,4 +197,4 @@ ku-IQ:
 -کاربران
 en-US:Users
 
--<?= $functionalitiesInstance->label("عبارت"); ?>
+-<?= $Translate->Label("عبارت"); ?>

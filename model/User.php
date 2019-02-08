@@ -1,7 +1,5 @@
 <?php
-
-include('../core/AModel.php');
-require_once '../core/Db.php';
+include_once BASEPATH . 'core/AModel.php';
 
 class User extends AModel
 {

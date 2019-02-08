@@ -16,7 +16,7 @@ if ($row['Type'] == 'QUST')
     $refrence = $post->FirstOrDefault($row['RefrenceID'],  $row['Language']);
     if ($refrence != null)
     {
-        $answers = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'ANSR' AND `UserID` = " . $functionalitiesInstance->ifexistsidx($_SESSION, 'PHP_AUTH_ID') . " AND (`Status` ='Approve' OR `Status` ='' OR `Status` ='Sent') AND `RefrenceID`='" . $refrence['MasterID'] . "'");
+        $answers = $post->ToList(-1, -1, "Submit", "DESC", "WHERE `Type` = 'ANSR' AND `UserID` = " . Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_ID') . " AND (`Status` ='Approve' OR `Status` ='' OR `Status` ='Sent') AND `RefrenceID`='" . $refrence['MasterID'] . "'");
         if (sizeof($answers) == 0)
         {
             header("HTTP/1.1 303 See Other");

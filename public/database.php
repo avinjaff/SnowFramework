@@ -13,30 +13,30 @@ require_once 'semi-orm/Posts.php';
 use orm\Posts;
 $post = new Posts($conn);
 include ('master/public-header.php');
-$Id = $functionalitiesInstance->ifexistsidx($_GET, 'id');
+$Id = Functionalities::IfExistsIndexInArray($_GET, 'id');
 $Username = $user->GetUsernameById($Id);
 echo '<table><tbody><tr><th></th><th>' .
-$functionalitiesInstance->label("شناسه اصلی") .
+$Translate->Label("شناسه اصلی") .
 '</th><th>' .
-$functionalitiesInstance->label("شناسه عددی") .
+$Translate->Label("شناسه عددی") .
 '</th><th>' .
-$functionalitiesInstance->label("ثبت") .
+$Translate->Label("ثبت") .
 '</th><th>' .
-$functionalitiesInstance->label("نام کاربری") .
+$Translate->Label("نام کاربری") .
 '</th><th>' .
-$functionalitiesInstance->label("عنوان") .
+$Translate->Label("عنوان") .
 '</th><th>' .
-$functionalitiesInstance->label("زبان") .
+$Translate->Label("زبان") .
 '</th><th>' .
-$functionalitiesInstance->label("وضعیت") .
+$Translate->Label("وضعیت") .
 '</th></tr>';
-if ($functionalitiesInstance->ifexistsidx($_GET, 'id') == "" && $user->GetRoleById($functionalitiesInstance->ifexistsidx($_SESSION, 'PHP_AUTH_ID')) == 'ADMIN')
+if (Functionalities::IfExistsIndexInArray($_GET, 'id') == "" && $user->GetRoleById(Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_ID')) == 'ADMIN')
 {
         $rows = $post->ToList(-1, -1, "ID", "DESC", "WHERE (`Type` = 'QUST' OR `Type` = 'POST')");
 }
-else if ($functionalitiesInstance->ifexistsidx($_GET, 'id') != "")
+else if (Functionalities::IfExistsIndexInArray($_GET, 'id') != "")
 {
-        $rows = $post->ToList(-1, -1, "ID", "DESC", "WHERE (`Type` = 'QUST' OR `Type` = 'POST') AND `UserID` = " . $functionalitiesInstance->ifexistsidx($_SESSION, 'PHP_AUTH_ID'));
+        $rows = $post->ToList(-1, -1, "ID", "DESC", "WHERE (`Type` = 'QUST' OR `Type` = 'POST') AND `UserID` = " . Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_ID'));
 }
 
 foreach ($rows as $row) {
@@ -45,10 +45,10 @@ foreach ($rows as $row) {
         switch ($row['Type'])
         {
                 case 'POST':
-                        echo '<a href="post.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">' . $functionalitiesInstance->label("مشاهده") . '</a>';
+                        echo '<a href="post.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">' . $Translate->Label("مشاهده") . '</a>';
                         break;
                 case 'QUST':
-                        echo '<a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">' . $functionalitiesInstance->label("مشاهده") . '</a>'; 
+                        echo '<a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">' . $Translate->Label("مشاهده") . '</a>'; 
                         break;
         }
         echo '</td>';

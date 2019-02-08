@@ -11,10 +11,10 @@ $rows = $user->ToList(-1, -1, "ID", "DESC", "");
 foreach ($rows as $row) {
     echo '<tr>';
     echo '<td>';
-    echo '<a href="search.php?Q=%40' . $row['Username'] . '">' . $functionalitiesInstance->label("فعالیت") . '</a>';
+    echo '<a href="search.php?Q=%40' . $row['Username'] . '">' . $Translate->Label("فعالیت") . '</a>';
     echo '</td>';
     echo '<td>';
-    echo '<a href="profile.php?id=' . $row['Id'] . '">' . $functionalitiesInstance->label("پروفایل") . '</a>';
+    echo '<a href="profile.php?id=' . $row['Id'] . '">' . $Translate->Label("پروفایل") . '</a>';
     echo '</td>';
     echo '<td>';
     echo $row['Username'];

@@ -16,7 +16,7 @@ if ($row == [])
 include ('master/public-header.php');
 $_GET['masterid'] = $row['MasterID'];
 $_GET["type"] = 'ANSR';
-echo '<a href="view.php?lang=' .$row['Language'] . '&id=' . $row['RefrenceID'] . '">' . $functionalitiesInstance->label("بازگشت") . '</a>';
+echo '<a href="view.php?lang=' .$row['Language'] . '&id=' . $row['RefrenceID'] . '">' . $Translate->Label("بازگشت") . '</a>';
 include ('views/render.php');
 include ('master/public-footer.php');
 ?>

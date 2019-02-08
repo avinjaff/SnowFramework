@@ -5,22 +5,22 @@ include ('forms/submit.php');
 include ('master/public-header.php');
 ?>
 <div id="sjfb-wrap">
-<h1><?= $functionalitiesInstance->label('فرم‌ساز') ?></h1>
+<h1><?= $Translate->Label('فرم‌ساز') ?></h1>
 <div id="sjfb" novalidate>
     <div id="form-fields">
     </div>
 </div>
 <div class="add-wrap">
-    <h3><?= $functionalitiesInstance->label('افزودن فیلد') ?></h3>
+    <h3><?= $Translate->Label('افزودن فیلد') ?></h3>
     <ul id="add-field">
-        <li><a id="add-link" data-type="link" href="#"><?= $functionalitiesInstance->label('لینک') ?></a></li>
-        <li><a id="add-desc" data-type="desc" href="#"><?= $functionalitiesInstance->label('توضیحات') ?></a></li>    
-        <li><a id="add-text" data-type="text" href="#"><?= $functionalitiesInstance->label('متن تک خط') ?></a></li>
-        <li><a id="add-textarea" data-type="textarea" href="#"><?= $functionalitiesInstance->label('متن چند خط') ?></a></li>
-        <li><a id="add-select" data-type="select" href="#"><?= $functionalitiesInstance->label('لیست آبشاری') ?></a></li>
-        <li><a id="add-radio" data-type="radio" href="#"><?= $functionalitiesInstance->label('دکمه‌های رادیویی') ?></a></li>
-        <li><a id="add-checkbox" data-type="checkbox" href="#"><?= $functionalitiesInstance->label('چک باکس') ?></a></li>
-        <li><a id="add-agree" data-type="agree" href="#"><?= $functionalitiesInstance->label('باکس تائید') ?></a></li>
+        <li><a id="add-link" data-type="link" href="#"><?= $Translate->Label('لینک') ?></a></li>
+        <li><a id="add-desc" data-type="desc" href="#"><?= $Translate->Label('توضیحات') ?></a></li>    
+        <li><a id="add-text" data-type="text" href="#"><?= $Translate->Label('متن تک خط') ?></a></li>
+        <li><a id="add-textarea" data-type="textarea" href="#"><?= $Translate->Label('متن چند خط') ?></a></li>
+        <li><a id="add-select" data-type="select" href="#"><?= $Translate->Label('لیست آبشاری') ?></a></li>
+        <li><a id="add-radio" data-type="radio" href="#"><?= $Translate->Label('دکمه‌های رادیویی') ?></a></li>
+        <li><a id="add-checkbox" data-type="checkbox" href="#"><?= $Translate->Label('چک باکس') ?></a></li>
+        <li><a id="add-agree" data-type="agree" href="#"><?= $Translate->Label('باکس تائید') ?></a></li>
     </ul>
 </div>
 </div>
