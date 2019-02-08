@@ -7,7 +7,8 @@ class PostDetail extends AModel
 	function __construct()
 	{
 		self::SetTable('post_details');
-		self::SetReadOnly(true);
+            self::SetReadOnly(true);
+            self::SetPrimaryKey('MasterId');
 		self::SetProperties(array(
             'MasterId' => NULL,
             'Title' => NULL,

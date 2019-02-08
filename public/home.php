@@ -1,7 +1,6 @@
 <?php
-include_once BASEPATH.'model/PostDetail.php';
 $rows=[];
-$rows = (new PostDetail($conn))->
+$rows = $PostDetail->
     Select(0, 48, "Submit", "DESC",
     "WHERE (`Level` = 1 OR `Level` = 2) AND `LANGUAGE`='" . $CURRENTLANGUAGE  . "'");
 

@@ -21,7 +21,7 @@ abstract class AModel
 	private $pk = 'Id'; // pk in table
 	private $pkType = 'Int'; // pk in table
 	private $propscount = ''; // how many props passed to methods?
-	private $readonly = ''; // commonly used for views
+	private $readonly = false; // commonly used for views
 
 	function IsReserved($Field, $IgnoreAggregate = false)
 	{
@@ -37,7 +37,7 @@ abstract class AModel
 		return password_hash($InputString, PASSWORD_DEFAULT);
 	}
 	function SetReadOnly($ReadOnly){
-		$this->$readonly = $ReadOnly;
+		$this->readonly = $ReadOnly;
 	}
 	function SetValue($Key, $Value){
 		$this->props[$Key] = $Value;

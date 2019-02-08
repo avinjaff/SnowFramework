@@ -37,8 +37,11 @@ set_error_handler(function($errno, $errstr, $errfile, $errline ){
     $exp -> print();
 });
 
+include_once BASEPATH.'model/PostDetail.php';
+$PostDetail = new PostDetail();
+
 include_once BASEPATH.'public/master/public-header.php';
-include_once (BASEPATH.'public/'.$controller.'.php');
+include_once (BASEPATH.'public/'.strtolower($controller).'.php');
 include_once BASEPATH.'public/master/public-footer.php';
 
 ?>
