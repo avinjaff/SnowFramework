@@ -1,15 +1,12 @@
 <?php
 include 'core/Initialize.php';
 
-$pathinfo = explode('/', trim(
-    Functionalities::IfExistsIndexInArray($_SERVER, "PATH_INFO")
-, '/') );
+$url = Functionalities::IfExistsIndexInArray($_SERVER, "PATH_INFO");
+$pathinfo = explode('/', trim($url, '/') );
 
-if (sizeof($pathinfo) < 1)
+$controller = $pathinfo[0];
+if (!$url)
     $controller = "Home";
-else
-{
-    $controller = $pathinfo[0];
-}
+
 print $controller;
 ?>
