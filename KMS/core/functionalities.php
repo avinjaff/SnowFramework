@@ -9,47 +9,6 @@ TODO: make functions static
 */
 class functionalities
 {
-    function label($key)
-    {
-        /*
-        TODO: What if it was a sentece in last record of dictionary? -It has bug ;)
-        */
-        $LANG = "fa-IR";
-        if(isset($_COOKIE["LANG"])) {
-            $LANG = $_COOKIE["LANG"];
-        }
-        if ($LANG == "fa-IR")
-        {
-            return $key;
-        }
-        $dictionary = explode("\n", file_get_contents('variable/dictionary.yaml'));
-        $keys = [];
-        for( $i= 0 ; $i <= sizeof($dictionary) ; $i++ )
-        {  
-            if (substr($dictionary[$i], 0, 1) == "-")
-            {
-                if ($key == substr($dictionary[$i], 1, strlen($dictionary[$i]) - 1))
-                {
-                    $k = $i;
-                    for ($j = $i + 1; $j <= sizeof($dictionary) ; $j++  )
-                    {
-                        if (substr($dictionary[$j], 0, 1) == "-")
-                        {
-                            $k = $j;
-                            break;
-                        }
-                    }
-                    if ($k > $i + 1)
-                        for ($j = $i + 1; $j <= $k ; $j++  )
-                            if (substr($dictionary[$j], 0, strlen($LANG)) == $LANG)
-                                return substr($dictionary[$j], strlen($LANG) + 1, strlen($dictionary[$j]) - 1 - strlen($LANG));
-                        return $key;
-                }
-            }
-        }
-        return $key;
-    }
-
     function ifexists($varname)
     {
       return(isset($$varname)?$varname:null);
@@ -72,9 +31,7 @@ class functionalities
         "")
         );
     }
-    function error($code) {
-        exit(header("Location: error.php?code=" . $code)); 
-    }
+
     function getMime($filename){
         
         if (function_exists('mime_content_type') && $mode==0) {
