@@ -81,4 +81,45 @@ CREATE OR REPLACE VIEW `post_contributers` AS select `P`.`MasterId` AS `MasterID
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `post_details`;
 -- USE `gordcms`;
-CREATE OR REPLACE VIEW `post_details` AS select `P`.`MasterId` AS `MasterID`,`P`.`Title` AS `Title`,`P`.`Id` AS `ID`,`P`.`Submit` AS `Submit`,`P`.`UserId` AS `UserID`,`U`.`Username` AS `Username`,`P`.`Body` AS `Body`,`P`.`Type` AS `Type`,`P`.`Level` AS `Level`,`P`.`RefrenceId` AS `RefrenceID`,`P`.`Index` AS `Index`,`P`.`Status` AS `Status`,`P`.`Language` AS `Language`,(case when ((select `P2`.`Submit` from `posts` `P2` where ((`P2`.`IsContentDeleted` = 1) and (`P`.`MasterId` = `P2`.`MasterId`)) order by `P2`.`Submit` desc limit 1) > (select `P1`.`Submit` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1)) then NULL else (select `P1`.`BinContent` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1) end) AS `BinContent` from (`posts` `P` join `users` `U` on((`P`.`UserId` = `U`.`Id`))) where (`P`.`Id` in (select max(`posts`.`Id`) from `posts` group by `posts`.`MasterId`,`posts`.`Language`) and (`P`.`IsDeleted` = '0'));
+CREATE OR REPLACE VIEW `post_details` AS 
+SELECT `P`.`masterid`   AS `MasterID`, 
+       `P`.`title`      AS `Title`, 
+       `P`.`id`         AS `ID`, 
+       `P`.`submit`     AS `Submit`, 
+       `P`.`userid`     AS `UserID`, 
+       `U`.`username`   AS `Username`, 
+       `P`.`body`       AS `Body`, 
+       `P`.`type`       AS `Type`, 
+       `P`.`level`      AS `Level`, 
+       `P`.`refrenceid` AS `RefrenceID`, 
+       `P`.`index`      AS `Index`, 
+       `P`.`status`     AS `Status`, 
+       `P`.`language`   AS `Language`, 
+       ( CASE 
+           WHEN ( (SELECT `P2`.`submit` 
+                   FROM   `posts` `P2` 
+                   WHERE  ( ( `P2`.`iscontentdeleted` = 1 ) 
+                            AND ( `P`.`masterid` = `P2`.`masterid` ) ) 
+                   ORDER  BY `P2`.`submit` DESC 
+                   LIMIT  1) > (SELECT `P1`.`submit` 
+                                FROM   `posts` `P1` 
+                                WHERE  ( ( `P1`.`bincontent` IS NOT NULL ) 
+                                         AND ( `P`.`masterid` = 
+                                             `P1`.`masterid` ) ) 
+                                ORDER  BY `P1`.`submit` DESC 
+                                LIMIT  1) ) THEN NULL 
+           ELSE (SELECT `P1`.`bincontent` 
+                 FROM   `posts` `P1` 
+                 WHERE  ( ( `P1`.`bincontent` IS NOT NULL ) 
+                          AND ( `P`.`masterid` = `P1`.`masterid` ) ) 
+                 ORDER  BY `P1`.`submit` DESC 
+                 LIMIT  1) 
+         end )          AS `BinContent` 
+FROM   (`posts` `P` 
+        JOIN `users` `U` 
+          ON(( `P`.`userid` = `U`.`id` ))) 
+WHERE  ( `P`.`id` IN (SELECT Max(`posts`.`id`) 
+                      FROM   `posts` 
+                      GROUP  BY `posts`.`masterid`, 
+                                `posts`.`language`) 
+         AND ( `P`.`isdeleted` = '0' ) ) 
