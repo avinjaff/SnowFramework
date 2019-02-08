@@ -4,8 +4,8 @@ include('../model/User.php');
 
 class userController extends AController{
 
-	function GET($Auth = true){
-		parent::GET($Auth);
+	function GET(){
+		parent::GET($Role);
 
 		$model = new User();
 		if (parent::getRequest('LOGINHELLO') == "true")
@@ -21,8 +21,8 @@ class userController extends AController{
 		parent::returnData();
 	}
 
-	function POST($Auth = false){ 
-		parent::POST($Auth);
+	function POST(){ 
+		parent::POST($Role);
 		$user = new User();	
 		foreach($user->GetProperties() as $key => $value){
 			$user->SetValue($key, 
@@ -34,9 +34,9 @@ class userController extends AController{
 		parent::returnData();
 	}
 
-	function PUT($Auth = true)
+	function PUT()
 	{
-		parent::PUT($Auth);
+		parent::PUT($Role);
 		$user = new User();
 		foreach($user->GetProperties() as $key => $value){
 			if (parent::getRequest($key) == null)
@@ -49,8 +49,8 @@ class userController extends AController{
 		parent::returnData();
 	}
 
-	function DELETE($Auth = false){
-		parent::DELETE($Auth);
+	function DELETE(){
+		parent::DELETE($Role);
 		$user = new User();
 		$user->SetValue("Id", parent::getRequest("Id"));
 		$user->Delete();
