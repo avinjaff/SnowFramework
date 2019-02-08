@@ -6,7 +6,7 @@ $pathinfo = explode('/', trim($url, '/') );
 
 $controller = $pathinfo[0];
 if (!$url)
-    $controller = "Home";
+    $controller = "home";
 
-print $controller;
+include 'public/'.$controller.'.php'
 ?>

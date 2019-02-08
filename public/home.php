@@ -1,5 +1,5 @@
 <?php
-include ('core/init.php');
+require_once ('core/Initialize.php');
 include ('master/public-header.php');
 require_once 'semi-orm/Posts.php';
 use orm\Posts;
