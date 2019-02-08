@@ -1,15 +1,14 @@
 <?php
 namespace core;
-require_once 'core/authorization.php';
-use core\authorization;
-require_once 'core/functionalities.php';
-use core\functionalities;
-require_once 'core/database_conn.php';
-use core\database_connection;
-require_once 'variable/config.php';
-use core\config;
 
-class authentication{
+require_once 'Authorization.php';
+use core\Authorization;
+require_once '../Config.php';
+use core\Config;
+require_once 'Cryptography.php';
+use core\Cryptography;
+
+class Authentication{
 
     private $authUsername = '';
     private $authPassword = '';
@@ -29,7 +28,7 @@ class authentication{
         }
     }
 
-    function login($path  = null){
+    function Login($path  = null){
 
         $db = new database_connection();
         $conn  = $db->open();
@@ -37,8 +36,10 @@ class authentication{
         $username_safe = mysqli_real_escape_string($conn, $this->authUsername);
         $password_safe = mysqli_real_escape_string($conn, $this->authPassword);
 
+        $password_hash = Cryptography::Hash($password_safe);
+
         // Login
-        $login_query = "SELECT `Id`, `Role` FROM `users` WHERE `Username`='" . $username_safe . "' AND `Password`='" . $password_safe . "';";
+        $login_query = "SELECT `Id`, `Role` FROM `users` WHERE `Username`='" . $username_safe . "' AND `Password`='" . $password_hash . "';";
         $login_result = mysqli_query($conn, $login_query);
         $login_num = mysqli_num_rows($login_result);
 

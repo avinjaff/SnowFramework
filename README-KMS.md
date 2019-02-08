@@ -6,7 +6,13 @@
 
 Notes:
 
+Use PascalCase for class names and functions
+Use lower_case for private and in-function variables
+
 Enable short tags on server
+Enable Engine using following syntax:
+    $ sudo a2enmod rewrite
+    $ sudo systemctl restart apache2
 
 Installation:
 

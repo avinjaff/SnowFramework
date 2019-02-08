@@ -7,11 +7,10 @@
  * @since         1.0
  */
 
-
-namespace core;
-
 class Config
 {
+    const TimeZone = "Asia/Tehran";
+
     const ConnectionString_SERVER  = "localhost";
     const ConnectionString_DATABASE = "SnowKMS";
     const ConnectionString_USERNAME  = "root";

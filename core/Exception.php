@@ -16,7 +16,7 @@ class MyException extends Exception
         return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }
 
-    public function customFunction() {
+    public function print() {
         echo "A custom function for this type of exception\n";
     }
 }

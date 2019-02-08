@@ -8,6 +8,8 @@
  * @since         1.0
  */
 
+// TODO: Every controller must have in-app output (Integration) and parsed output (Web API)
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 

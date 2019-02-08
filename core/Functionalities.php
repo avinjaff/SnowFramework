@@ -1,25 +1,23 @@
 <?php
-namespace core;
-
-/*
-
-TODO: make functions static
-
-
-*/
-class functionalities
+class Functionalities
 {
-    function ifexists($varname)
+
+    public static function HelloWorld()
+    {
+        print ('HelloWorld');
+    }
+
+    public static function IfExists($varname)
     {
       return(isset($$varname)?$varname:null);
     }
 
-    function ifexistsidx($var,$index)
+    public static function IfExistsIndexInArray($var,$index)
     {
         return(isset($var[$index])?$var[$index]:null);
     }
 
-    function makeAbstract($input, $lenght, $allowed_tags = null)
+    public static function GenerateAbstractForPost($input, $lenght, $allowed_tags = null)
     {
         // TODO : bug : question mark at the end of the string for persian characters
         // mb_internal_encoding('UTF-8');     
@@ -32,7 +30,7 @@ class functionalities
         );
     }
 
-    function getMime($filename){
+    public static function GetMime($filename){
         
         if (function_exists('mime_content_type') && $mode==0) {
             $mimetype = mime_content_type($filename);

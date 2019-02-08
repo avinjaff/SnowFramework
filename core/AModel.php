@@ -8,6 +8,8 @@
  * @since         1.0
  */
 
+// Improve Data Structure to support validation messages and more complicated Data Types
+
 include_once 'IModel.php';
 
 abstract class AModel

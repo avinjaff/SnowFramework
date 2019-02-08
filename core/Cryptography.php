@@ -1,14 +1,10 @@
 <?php
 
-class Password {
+class Cryptography {
     const SALT = 'MyVoiceIsMyPassport';
  
-    public static function hash($password) {
+    public static function Hash($password) {
         return hash('sha512', self::SALT . $password);
-    }
- 
-    public static function verify($password, $hash) {
-        return ($hash == self::hash($password));
     }
 }
 
