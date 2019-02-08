@@ -17,7 +17,7 @@
 CREATE TABLE IF NOT EXISTS `users` (
   `Id` INT(11) NOT NULL AUTO_INCREMENT,
   `Username` VARCHAR(45) NULL DEFAULT NULL,
-  `Password` TINYTEXT NULL DEFAULT NULL,
+  `HashPassword` TINYTEXT NULL DEFAULT NULL,
   `Active` BIT(1) NULL DEFAULT b'1',
   `Role` CHAR(5) NULL DEFAULT 'VSTOR',
   PRIMARY KEY (`Id`),
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `Submit` DATETIME NOT NULL,
   `Type` CHAR(5) NOT NULL DEFAULT 'POST' COMMENT 'POST, FILE, ARTL, COMT, SURV, QUST, ANSR,CHAT,TRNL,QUOT',
   `Level` CHAR(2) NULL DEFAULT 'DC' COMMENT 'Data Content by default. Other SEO and publish levels must be declared with integrers.',
-  `Content` LONGBLOB NULL DEFAULT NULL,
+  `BinContent` LONGBLOB NULL DEFAULT NULL,
   `Body` LONGTEXT NULL DEFAULT NULL,
   `UserId` INT(11) NULL DEFAULT NULL,
   `Status` CHAR(7) NULL DEFAULT 'DRAFT' COMMENT 'Post lifecycle',
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `post_contributers` (`MasterID` INT, `ID` INT, `UserI
 -- -----------------------------------------------------
 -- Placeholder table for view `post_details`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `post_details` (`MasterID` INT, `Title` INT, `ID` INT, `Submit` INT, `UserID` INT, `Username` INT, `Body` INT, `Type` INT, `Level` INT, `RefrenceID` INT, `Index` INT, `Status` INT, `Language` INT, `Content` INT);
+CREATE TABLE IF NOT EXISTS `post_details` (`MasterID` INT, `Title` INT, `ID` INT, `Submit` INT, `UserID` INT, `Username` INT, `Body` INT, `Type` INT, `Level` INT, `RefrenceID` INT, `Index` INT, `Status` INT, `Language` INT, `BinContent` INT);
 
 -- -----------------------------------------------------
 -- View `post_contributers`
@@ -81,4 +81,4 @@ CREATE OR REPLACE VIEW `post_contributers` AS select `P`.`MasterId` AS `MasterID
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `post_details`;
 -- USE `gordcms`;
-CREATE OR REPLACE VIEW `post_details` AS select `P`.`MasterId` AS `MasterID`,`P`.`Title` AS `Title`,`P`.`Id` AS `ID`,`P`.`Submit` AS `Submit`,`P`.`UserId` AS `UserID`,`U`.`Username` AS `Username`,`P`.`Body` AS `Body`,`P`.`Type` AS `Type`,`P`.`Level` AS `Level`,`P`.`RefrenceId` AS `RefrenceID`,`P`.`Index` AS `Index`,`P`.`Status` AS `Status`,`P`.`Language` AS `Language`,(case when ((select `P2`.`Submit` from `posts` `P2` where ((`P2`.`ContentDeleted` = 1) and (`P`.`MasterId` = `P2`.`MasterId`)) order by `P2`.`Submit` desc limit 1) > (select `P1`.`Submit` from `posts` `P1` where ((`P1`.`Content` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1)) then NULL else (select `P1`.`Content` from `posts` `P1` where ((`P1`.`Content` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1) end) AS `Content` from (`posts` `P` join `users` `U` on((`P`.`UserId` = `U`.`Id`))) where (`P`.`Id` in (select max(`posts`.`Id`) from `posts` group by `posts`.`MasterId`,`posts`.`Language`) and (`P`.`Deleted` = '0'));
+CREATE OR REPLACE VIEW `post_details` AS select `P`.`MasterId` AS `MasterID`,`P`.`Title` AS `Title`,`P`.`Id` AS `ID`,`P`.`Submit` AS `Submit`,`P`.`UserId` AS `UserID`,`U`.`Username` AS `Username`,`P`.`Body` AS `Body`,`P`.`Type` AS `Type`,`P`.`Level` AS `Level`,`P`.`RefrenceId` AS `RefrenceID`,`P`.`Index` AS `Index`,`P`.`Status` AS `Status`,`P`.`Language` AS `Language`,(case when ((select `P2`.`Submit` from `posts` `P2` where ((`P2`.`ContentDeleted` = 1) and (`P`.`MasterId` = `P2`.`MasterId`)) order by `P2`.`Submit` desc limit 1) > (select `P1`.`Submit` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1)) then NULL else (select `P1`.`BinContent` from `posts` `P1` where ((`P1`.`BinContent` is not null) and (`P`.`MasterId` = `P1`.`MasterId`)) order by `P1`.`Submit` desc limit 1) end) AS `BinContent` from (`posts` `P` join `users` `U` on((`P`.`UserId` = `U`.`Id`))) where (`P`.`Id` in (select max(`posts`.`Id`) from `posts` group by `posts`.`MasterId`,`posts`.`Language`) and (`P`.`Deleted` = '0'));

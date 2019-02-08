@@ -13,13 +13,9 @@ class User extends AModel
 			// 'KEY' => DEFAULT_VALUE,
 			'Id'=>NULL,
 			'Username'=>NULL,
-			'Firstname'=>NULL,
-			'Lastname'=>NULL,
-			'NationalCode'=>NULL,
 			'HashPassword'=>NULL,
-			'IsActive'=>1,
-			'Type'=>'USER',
-			'BinImage'=>NULL,
+			'Active'=>0,
+			'Role'=>'VSTOR',
 		));
 	}
 }

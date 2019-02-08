@@ -1,6 +1,5 @@
 <?php
-require_once 'Config.php';
-use core\Config;
+require_once 'Init.php';
 
 class Db
 {
@@ -20,7 +19,7 @@ class Db
 		$conn = $this->Open();
 		$query  = "INSERT INTO `Logs` (`Content`, `UserId`, `Event`, `Agent`, `Connection`) VALUES ('" .
 		mysqli_real_escape_string($conn, $Notes ) 
-		. "', " . $UserId . ", NOW(), 'API', '" . 
+		. "', " . $UserId . ", NOW(), 'SnowKMS', '" . 
 		mysqli_real_escape_string($conn, $Connection ) 
 		. "');";
 		mysqli_query($conn, $query);

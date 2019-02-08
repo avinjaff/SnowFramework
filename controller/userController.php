@@ -30,7 +30,6 @@ class userController extends AController{
 			);
 		}
 		$user->Insert();
-		(new Authentication())->AddAccess("~", "~", "Users.Id", $user->GetProperties()['Id']);
 		parent::setData($user->GetProperties());
 		parent::returnData();
 	}
@@ -55,7 +54,6 @@ class userController extends AController{
 		$user = new User();
 		$user->SetValue("Id", parent::getRequest("Id"));
 		$user->Delete();
-		(new Authentication())->RemoveAccess("~", "~", "Users.Id", parent::getRequest("Id"));
 		parent::setData($user->GetProperties());
 		parent::returnData();
 	}
