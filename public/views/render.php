@@ -1,29 +1,26 @@
 <?php
-/* TODO: Remove me */ $parent = realpath(dirname(__FILE__) . '/..');
-require_once  $parent . '/core/functionalities.php';
-require_once  $parent . '/plug-in/Parsedown.php';
-use core\functionalities;
-$functionalitiesInstance = new functionalities();
+include_once BASEPATH . 'public/plug-in/Parsedown.php';
+include_once BASEPATH . 'core/Text.php';
 $Parsedown = new Parsedown();
 switch ($_GET['type'])
 {
     case "POST":
-        include($parent . '/views/POST.php');
+        include BASEPATH . 'public/views/POST.php';
         break;
     case "COMT":
-        include($parent . '/views/COMT.php');
+        include BASEPATH . 'public/views/COMT.php';
         break;
     case "KWRD":
-        include($parent . '/views/KWRD.php');
+        include BASEPATH . 'public/views/KWRD.php';
         break;
     case "FILE":
-        include($parent . '/views/FILE.php');
+        include BASEPATH . 'public/views/FILE.php';
         break;
     case "QUST":
-        include($parent . '/views/QUST.php');
+        include BASEPATH . 'public/views/QUST.php';
         break;
     case "ANSR":
-        include($parent . '/views/ANSR.php');
+        include BASEPATH . 'public/views/ANSR.php';
         break;
 }
 ?>

@@ -20,10 +20,10 @@ switch ($_GET["level"])
         // $extension = $launch[1];
         // $os = array("png", "jpg", "jpeg", "bmp", "gif");
         // if (in_array($extension, $os)) {
-            echo '<img src="download.php?id=' . $Id . '" alt="' . $row["Title"] . '" />';
+            echo '<img src="download.php?id=' . $row["Id"] . '" alt="' . $row["Title"] . '" />';
         // }
         // else if ($extension != "x-empty") {
-             echo '<a class="attachment" href="download.php?id=' . $Id . '">' . $Translate->Label("دانلود پیوست") . '</a>';
+             echo '<a class="attachment" href="download.php?id=' . $row["Id"] . '">' . $Translate->Label("دانلود پیوست") . '</a>';
         // }
         include ('helper/post_edit.php');
         echo '<h1>' . $row['Title'] . '</h1>';
@@ -52,14 +52,14 @@ switch ($_GET["level"])
     case "3":
         echo '<li><a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">';
         echo '  <h1>' . $row['Title'] . '</h1><br>';
-        echo '  <span>' . $functionalitiesInstance->makeAbstract($Parsedown->text($row['Body']), 120) . '</span>';
+        echo '  <span>' . Text::GenerateAbstractForPost($Parsedown->text($row['Body']), 120) . '</span>';
         echo '</a></li>';
         break;
     case "1":
         echo '<a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">';
         echo '<img src="download.php?id=' . $row['MasterID'] . '" alt="' . $row["Title"] . '" >';
         echo '<h2>' . $row['Title'] . '</h2>';
-        echo '<p>' . $functionalitiesInstance->makeAbstract($Parsedown->text($row['Body']), 480)  . '</p>';
+        echo '<p>' . Text::GenerateAbstractForPost($Parsedown->text($row['Body']), 480)  . '</p>';
         echo '</a>';
         break;
     case "2":
@@ -68,7 +68,7 @@ switch ($_GET["level"])
         echo '<div>';
         echo '<h4><b>' . $row['Username'] . '</b></h4>';
         echo '<h2><a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">' . $row['Title'] . '</a></h2>';
-        echo $functionalitiesInstance->makeAbstract($Parsedown->text($row['Body']), 960, "<img>");
+        echo Text::GenerateAbstractForPost($Parsedown->text($row['Body']), 960, "<img>");
         echo '</div>';
         echo '</article>';
         break;

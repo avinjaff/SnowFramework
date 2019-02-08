@@ -6,7 +6,7 @@ class Post extends AModel
 
 	function __construct()
 	{
-		self::SetTable('Posts');
+		self::SetTable('posts');
 		self::SetProperties(array(
 			// 'KEY' => DEFAULT_VALUE,
             'MasterId' => sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',

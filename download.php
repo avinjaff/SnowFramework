@@ -1,15 +1,14 @@
 <?php
-include ('core/init.php');
-require_once 'core/functionalities.php';
-use core\functionalities;
+include ('core/Initialize.php');
 
-$Id = mysqli_real_escape_string($conn, $_GET["id"]);
+$Id = $_GET["id"];
 
-$query = "SELECT `Content` FROM `post_details` where MasterID='" . $Id . "';";
-
-$result = mysqli_query($conn, $query);
-$item = mysqli_fetch_array($result);
-$content = $item["Content"];
+include_once BASEPATH.'model/PostDetail.php';
+$PostDetail = new PostDetail();
+$PostDetail->SetValue("BinContent", "✓");
+$PostDetail->DisableEncoding(true);
+$item = $PostDetail->Select(-1, 1, 'MasterID', 'ASC', "WHERE `MasterID`='" . $Id . "'")[0];
+$content = $item["BinContent"];
 
 $finfo = new finfo(FILEINFO_MIME);
 $type = $finfo->buffer($content);
@@ -22,6 +21,7 @@ $name = "Gord-" . $Id . '.' . $launch[1];
 
 header("Content-type: " . $type);
 header('Content-Disposition: attachment; filename="' . $name . '"');
+// header("Content-Transfer-Encoding: base64");
 header("Content-Transfer-Encoding: binary");
 // header('Expires: 0');
 // header('Pragma: no-cache');
@@ -29,6 +29,4 @@ header("Expires: ".gmdate("D, d M Y H:i:s", time()+1800)." GMT");
 header("Cache-Control: max-age=1800");
 header("Content-Length: " . $size);
 echo $content;
-exit;
-// TODO: include ('core/database_close.php');
 ?>

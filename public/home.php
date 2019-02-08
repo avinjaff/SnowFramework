@@ -22,5 +22,4 @@ foreach ($rows as $row) {
     include ('views/render.php');
         break;
 }
-
 ?>

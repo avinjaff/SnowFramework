@@ -71,7 +71,7 @@ if ($Q != null)
                     echo '<a href="view.php?lang=' . $row['Language'] . '&id=' . $row['MasterID'] . '">' .
                     '<img src="download.php?id=' . $row['MasterID'] . '" alt="' . $row['Title'] . '" />' .
                     '<span>' . $row['Title'] . '</span>' .
-                    '<p>' . $functionalitiesInstance->makeAbstract($Parsedown->text($row['Body']), 480)  . '</p>' .
+                    '<p>' . Text::GenerateAbstractForPost($Parsedown->text($row['Body']), 480)  . '</p>' .
                     '</a>';
                     break;
                 case 'QUST':

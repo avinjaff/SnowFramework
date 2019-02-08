@@ -22,6 +22,7 @@ abstract class AModel
 	private $pkType = 'Int'; // pk in table
 	private $propscount = ''; // how many props passed to methods?
 	private $readonly = false; // commonly used for views
+	private $disableencoding = false; // used to optimize cpu in download.php
 
 	function IsReserved($Field, $IgnoreAggregate = false)
 	{
@@ -55,6 +56,10 @@ abstract class AModel
 	function GetProperties(){
 		return $this->props;
 	}
+	function DisableEncoding($Disable)
+	{
+		$this->disableencoding = $Disable;
+	}
 	function SetTable($Table)
 	{
 		$this->table = $Table;
@@ -82,7 +87,7 @@ abstract class AModel
 				if (($key != $this->pk && $value == "✓")
 					|| $key == $this->pk)
 				{
-					if (substr($key, 0, 3) == "Bin")
+					if (substr($key, 0, 3) == "Bin" && !$this->disableencoding)
 						$fields .= "TO_BASE64(`" . $key . "`) as " . $key . ", ";
 					else
 						$fields .= '`' . $key . '`, ';
@@ -110,6 +115,7 @@ abstract class AModel
 			header("HTTP/1.0 404 Not Found");
 			return;
 		}
+		/*
 		$num = mysqli_num_rows($result);
 		if ($num == 1)
 		{
@@ -119,22 +125,21 @@ abstract class AModel
 			foreach($this->GetProperties() as $key => $value)
 				if (isset($values[$key]))
 				{
-					// if (substr($key, 0, 3) == "Bin")
-					// 	$values[$key] = base64_encode($values[$key]);
 					$this->SetValue($key, $values[$key]);
 				}
-			// Return Single Record
 			return $this->GetProperties();
 		}
 		else if ($num > 1)
 		{
-			// Return Multiple Rows
+		*/
 			$rows = array();
 			while(($row = mysqli_fetch_array($result))) {
 				$rows[] = $row;
 			}
 			return $rows;
+		/*
 		}
+		*/
 	}
 	function Delete()
 	{
@@ -174,9 +179,6 @@ abstract class AModel
 				&& substr($key, 0, 3) == "Bin")
 			{
 				$value = "FROM_BASE64('" . explode(',', urldecode($value))[1] . "')";
-				// $value = "FROM_BASE64('" . $value . "')";
-				// $value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
-				// $value = "'" . base64_decode(explode(',', $value)[1]) . "'";
 			}
 			if (isset($value))
 				if ($this->IsReserved($key))
@@ -222,7 +224,6 @@ abstract class AModel
 			{
 				if ($value != null)
 					$value = "FROM_BASE64('" . explode(',', $value)[1] . "')";
-				// $value = "'" . base64_decode(explode(',', $value)[1]) . "'";
 			}
 			if (isset($value))
 				if ($this->IsReserved($key) and $this->pkType != "String")

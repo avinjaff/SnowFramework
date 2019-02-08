@@ -8,9 +8,9 @@ class PostDetail extends AModel
 	{
 		self::SetTable('post_details');
             self::SetReadOnly(true);
-            self::SetPrimaryKey('MasterId');
+            self::SetPrimaryKey('MasterID');
 		self::SetProperties(array(
-            'MasterId' => NULL,
+            'MasterID' => NULL,
             'Title' => NULL,
             'ID' => NULL,
             'Submit' => NULL,
