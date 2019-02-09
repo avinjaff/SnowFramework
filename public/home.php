@@ -125,11 +125,13 @@
       </div>
 
       <div class="p-3">
-        <h4 class="font-italic">Elsewhere</h4>
+        <h4 class="font-italic"><?= $Translate->Label("واژگان کلیدی"); ?></h4>
         <ol class="list-unstyled">
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Facebook</a></li>
+          <?php
+          foreach (explode(',', Config::META_KEYWORDS) as $Keyword) {
+              echo '<li><a rel="search" href="' . $BASEURL . 'search/' . $Keyword . '"> ' . $Keyword . ' </a>' . '</li>';
+          }
+          ?>
         </ol>
       </div>
     </aside>
