@@ -18,5 +18,7 @@ var myPrettyCode = function() {
 		spellChecker: false,
 	});
 };
-loadStyle("css/simplemde.css");
-loadScript("js/simplemde.js", myPrettyCode);
+loadStyle("public/css/simplemde.css");
+loadScript("public/js/simplemde.js", myPrettyCode);
+loadScript("public/js/ezdz.js", myPrettyCode);
+loadScript("public/js/select2.js", myPrettyCode);

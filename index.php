@@ -10,6 +10,8 @@ set_error_handler(function($errno, $errstr, $errfile, $errline ){
     "\nline:" . $errline
     , $errno);
     $exp -> print();
+    header("HTTP/1.0 500 Internal Server Error");
+    return;
 });
 
 
@@ -39,8 +41,14 @@ $JSLINKS = Links::GenerateJsLinks($URL, $CURRENTLANGUAGE, $BASEURL);
 include_once BASEPATH.'model/PostDetail.php';
 $PostDetail = new PostDetail();
 
+$Filename = BASEPATH.'public/'.$PATHINFO[1].'.php';
+if (!file_exists($Filename))
+{
+    header("HTTP/1.0 404 Not Found");
+    return;
+}
 include_once BASEPATH.'public/master/public-header.php';
-include_once (BASEPATH.'public/'.$PATHINFO[1].'.php');
+include_once $Filename;
 include_once BASEPATH.'public/master/public-footer.php';
 
 ?>
