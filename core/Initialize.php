@@ -42,5 +42,7 @@ function __autoload($class_name) {
      * Optimized functions
      */
     require_once BASEPATH."core/Functionalities.php";
+    require_once BASEPATH."core/Text.php";
+    require_once BASEPATH."core/File.php";
 }
 ?>

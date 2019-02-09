@@ -1,6 +1,3 @@
-<?php
-use core\config;
-?>
 <meta name="author" content="<?= $row['Username'] ?>">
 <meta itemprop="description" content="<?= Text::GenerateAbstractForPost($row['Body'], 920) ?>">
 <meta property="og:title" content="<?= $row['Title'] ?>">

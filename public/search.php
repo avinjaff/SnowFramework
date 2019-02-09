@@ -1,13 +1,4 @@
 <?php
-include ('core/init.php');
-include ('master/public-header.php');
-require_once 'core/functionalities.php';
-use core\functionalities;
-require_once 'semi-orm/Posts.php';
-use orm\Posts;
-require_once  $parent . '/plug-in/Parsedown.php';
-$functionalitiesInstance = new functionalities();
-$Parsedown = new Parsedown();
 $Q = Functionalities::IfExistsIndexInArray($_GET,'Q');
 ?>
 <form class="example" method="GET" action="search.php">

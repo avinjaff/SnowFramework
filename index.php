@@ -37,6 +37,9 @@ $_SESSION['PHP_AUTH_PWD'] = '';
 include_once BASEPATH.'model/PostDetail.php';
 $PostDetail = new PostDetail();
 
+require_once BASEPATH.'public/plug-in/Parsedown.php';
+$Parsedown = new Parsedown();
+
 include_once BASEPATH.'public/plug-in/Links.php';
 if ($PATHINFO[1] == 'view')
 {
