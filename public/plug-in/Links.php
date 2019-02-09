@@ -36,5 +36,16 @@ class Links
         }
         return $output;
     }
+    public static function GenerateMeta($META_DESCRIPTION, $META_AUTHOR)
+    {
 
+        return $output = '
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="' . $META_DESCRIPTION . '">
+        <meta name="keywords" content="' . Config::META_KEYWORDS . '">
+        <meta name="author" content="' . $META_AUTHOR . '">
+        <meta name="generator" content="SnowKMS ' . (new Xei())::THEVERSION . '">
+        ';
+    }
 }

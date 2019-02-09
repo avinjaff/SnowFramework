@@ -4,10 +4,7 @@ class Translate
 {
     public static function Label($key)
     {
-        /*
-        TODO: What if it was a sentece in last record of dictionary? -It has bug ;)
-        */
-        $language = "fa-IR";
+        $language = "en-US";
         if(isset($_COOKIE["LANG"])) {
             $language = $_COOKIE["LANG"];
         }
@@ -15,11 +12,13 @@ class Translate
         {
             return $key;
         }
-        $dictionary = explode("\n", file_get_contents('variable/dictionary.yaml'));
+        $dictionary = explode("\n", file_get_contents(BASEPATH . 'dictionary.yaml'));
         $keys = [];
         for( $i= 0 ; $i <= sizeof($dictionary) ; $i++ )
         {  
-            if (substr($dictionary[$i], 0, 1) == "-")
+            if (
+                Functionalities::IfExistsIndexInArray($dictionary, $i) &&
+                substr($dictionary[$i], 0, 1) == "-")
             {
                 if ($key == substr($dictionary[$i], 1, strlen($dictionary[$i]) - 1))
                 {

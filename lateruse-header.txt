@@ -1,0 +1,24 @@
+   include ('public/helper/menu.php'); 
+  
+  echo $Translate->Label(config::NAME); 
+   
+    include ('public/helper/choose_language.php');
+
+  switch (Functionalities::IfExistsIndexInArray($_GET, 'message'))
+  {
+    case '✓':
+      echo '<span class="message">';
+      echo  $Translate->Label('فرایند با موفقیت اعمال شد');
+      echo '</span>';
+      break;
+    case '⎗':
+      echo '<span class="message">';
+      echo  $Translate->Label('لطفا پیش نیاز معتبر را ارسال فرمایید');
+      echo '</span>';
+      break;
+    case '⊥':
+      echo '<span class="message">';
+      echo  $Translate->Label('کلمه‌ی عبور قبلی نادرست است');
+      echo '</span>';
+      break;
+  }

@@ -1,13 +1,21 @@
 -گُرد
 en-US:Gord
--سامانه‌ی مدیریت محتوی گرد
-en-US:Gord CMS
+ku-IQ:
+-سامانه‌ی مدیریت دانش
+en-US:Knowledge Management System
+ku-IQ:
+-مدیر دانش
+en-US:KMS
+ku-IQ:
 -شناسه اصلی
 en-US:Master ID
+ku-IQ:
 -شناسه عددی
 en-US:Numeric ID
+ku-IQ:
 -خانه
 en-US:Home
+ku-IQ:
 -ثبت
 en-US:Submit
 ku-IQ:
@@ -22,8 +30,10 @@ en-US:Our Partners
 ku-IQ:
 -دانلود
 en-US:Download
+ku-IQ:
 -توضیح
 en-US:Description
+ku-IQ:
 -یادداشت ها
 en-US:Notes
 ku-IQ:
@@ -44,6 +54,7 @@ en-US:Title
 ku-IQ:
 -سریع
 en-US:Fast
+ku-IQ:
 -فرم‌ساز
 en-US:Form Builder
 ku-IQ:
@@ -85,20 +96,28 @@ en-US:Account
 ku-IQ:
 -افزودن فیلد
 en-US:Add Field
+ku-IQ:
 -متن تک خط
 en-US:Single Line Text
+ku-IQ:
 -متن چند خط
 en-US:Multiline Text
+ku-IQ:
 -لیست آبشاری
 en-US:Drop Down List
+ku-IQ:
 -دکمه‌های رادیویی
 en-US:Radio buttons
+ku-IQ:
 -چک باکس
 en-US:Check Box
+ku-IQ:
 -باکس تائید
 en-US:Agree Box
+ku-IQ:
 -خروج
 en-US:Exit
+ku-IQ:
 -تائید
 en-US:Apply
 ku-IQ:
@@ -119,6 +138,7 @@ en-US:Attachement
 ku-IQ:
 -اسم
 en-US:name
+ku-IQ:
 -نام
 en-US:Firstname
 ku-IQ:
@@ -136,8 +156,10 @@ en-US:Password
 ku-IQ:
 -کلمه‌ی عبور قبلی نادرست است
 en-US:Wrong previous password
+ku-IQ:
 -مشاهده پاسخ‌های قبلی
 en-US:Previous answers
+ku-IQ:
 -ورود
 en-US:Enter
 ku-IQ:
@@ -146,24 +168,31 @@ en-US:Confirm
 ku-IQ:
 -تراکنش‌های مالی
 en-US:Payments
+ku-IQ:
 -پیش نیاز
 en-US:Requrements
+ku-IQ:
 -تغییر کلمه‌ی عبور
 en-US:Change Password
+ku-IQ:
 -جعبه‌ی همه
 en-US:Everyone's box
+ku-IQ:
 -فعالیت
 en-US:Activity
+ku-IQ:
 -گذرواژه‌ی جدید
 en-US:New password
 ku-IQ:
 -پایگاه داده
 en-US:Database
+ku-IQ:
 -گذرواژه‌ی قبلی
 en-US:Previous password
 ku-IQ:
 -لطفا پیش نیاز معتبر را ارسال فرمایید
 en-US:Please fill out the prerequested form
+ku-IQ:
 -تصویر
 en-US:Image
 ku-IQ:
@@ -172,6 +201,7 @@ en-US:Regsiter
 ku-IQ:
 -فرایند با موفقیت اعمال شد
 en-US:Your request done successfuly
+ku-IQ:
 -عبارت را وارد نمائید
 en-US:Enter the phrase
 ku-IQ:
@@ -180,6 +210,7 @@ en-US:No result found
 ku-IQ:
 -پایگاه داده‌ی همه
 en-US:Everyone's Database
+ku-IQ:
 -ویرایش نسخه‌ی اصلی
 en-US:Edit original
 ku-IQ:
@@ -187,14 +218,18 @@ ku-IQ:
 en-US:Update
 -جعبه
 en-US:Box
+ku-IQ:
 -احراز هویت ناموفق
 en-us:Login failed
+ku-IQ:
 -ذخیره
 en-US:Save
+ku-IQ:
 -ویرایش فارسی
 en-US:Edit English
 ku-IQ:
 -کاربران
 en-US:Users
+ku-IQ:
 
 -<?= $Translate->Label("عبارت"); ?>

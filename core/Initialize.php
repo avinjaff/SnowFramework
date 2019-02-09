@@ -8,6 +8,9 @@
  */
 
 
+require_once 'Xei.php';
+
+
 define("DATETIMENOW", date('Y-m-d h:i:s.u', time()));
 define("BASEPATH", str_replace('\\','/',realpath(dirname(__FILE__) . '/..') .'/'));
 if (session_status() == PHP_SESSION_NONE) 
@@ -35,11 +38,6 @@ function __autoload($class_name) {
      * Set time zone
      */
     date_default_timezone_set(Config::TimeZone);
-    /**
-     * Set Default Language
-     */
-    if (!isset($_COOKIE["LANG"]))
-        setcookie('LANG', 'en-US', time() + (86400 * 30), '/');
     /**
      * Optimized functions
      */

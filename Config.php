@@ -28,12 +28,13 @@ class Config
 
     const BASEURL = "http://localhost/SnowFramework/"; //       /Anything
     const TITLE = "سامانه‌ی مدیریت دانش";
-    const LANGUAGE = "Farsi";
+    const LANGUAGE = "English";
     const REGION = "IR";
     const NAME = "KMS";
     const SPONSOR = "Gordarg";
     const META_KEYWORDS = "knowledge, social network, content, SEO, telecommunications, e-business";
-    const META_DESCRIPTION = "";
+    const META_DESCRIPTION = "DESCRIPTION HERE";
+    const META_AUTHOR = "";
     
     const WebMaster = "info@gordarg.com";
 }
