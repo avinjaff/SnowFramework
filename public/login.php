@@ -1,7 +1,4 @@
 <?php
-include ('core/init.php');
-require_once ('core/authentication.php');
-use core\authentication;
 if (isset($_GET['way']) && ($_GET['way'] == 'bye'))
 {
     session_destroy();
@@ -16,12 +13,30 @@ if (isset($_POST['login']))
     $_SESSION['PHP_AUTH_ID'] = $UserId[0];
     if ($UserId != null)
         exit(header("Location: profile.php?id=" . $UserId[0]));
-}
-include_once ('master/public-header.php');   
+}  
 if (isset($_POST['login']))
     echo '<div class="message">' . $Translate->Label("احراز هویت ناموفق") . '</div>';
 ?>
-<form action="login.php" method="post">
+<div class="container">
+<form class="form-signin text-center">
+<img class="mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+<label for="inputEmail" class="sr-only">Email address</label>
+<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+<label for="inputPassword" class="sr-only">Password</label>
+<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+<div class="checkbox mb-3">
+<label>
+<input type="checkbox" value="remember-me"> Remember me
+</label>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</form>
+</div>
+
+
+<!-- <form action="login.php" method="post">
     <img src="variable/logo.svg" alt="logo" class="avatar">
 
     <label for="user"><?= $Translate->Label("نام کاربری"); ?></label>
@@ -32,5 +47,4 @@ if (isset($_POST['login']))
 
     <button type="submit" name="login" ><?= $Translate->Label("ورود"); ?></button>
     <a href="index.php"><?= $Translate->Label("انصراف"); ?></a>
-</form>
-<?php include_once ('master/public-footer.php'); ?> 
+</form> -->
