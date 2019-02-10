@@ -1,241 +1,264 @@
 -گُرد
-en-US:Gord
-ku-IQ:
+en-us:Gord
+ku-iq:
 -سامانه‌ی مدیریت دانش
-en-US:Knowledge Management System
-ku-IQ:
+en-us:Knowledge Management System
+ku-iq:
 -مدیر دانش
-en-US:KMS
-ku-IQ:
+en-us:KMS
+ku-iq:
 -شناسه اصلی
-en-US:Master ID
-ku-IQ:
+en-us:Master ID
+ku-iq:
+-نظرات
+en-us:Comments
+ku-iq:
 -شناسه عددی
-en-US:Numeric ID
-ku-IQ:
+en-us:Numeric ID
+ku-iq:
 -خانه
-en-US:Home
-ku-IQ:
+en-us:Home
+ku-iq:
 -ثبت
-en-US:Submit
-ku-IQ:
+en-us:Submit
+ku-iq:
 -جستجو
-en-US:Search
-ku-IQ:
+en-us:Search
+ku-iq:
 -تماس با ما
-en-US:Contact-Us
-ku-IQ:
+en-us:Contact-Us
+ku-iq:
+-مرا به خاطر بسپار
+en-us:Remember me
+ku-iq:
+-بازگشت
+en-us:Back
 -همراهان ما
-en-US:Our Partners
-ku-IQ:
+en-us:Our Partners
+ku-iq:
 -درباره ما
-en-US:About us
-ku-IQ:
+en-us:About us
+ku-iq:
 -ادامه مطلب
-en-US:Continue reading
-ku-IQ:
+en-us:Continue reading
+ku-iq:
 -دانلود
-en-US:Download
-ku-IQ:
+en-us:Download
+ku-iq:
 -توضیح
-en-US:Description
-ku-IQ:
+en-us:Description
+ku-iq:
 -یادداشت ها
-en-US:Notes
-ku-IQ:
+en-us:Notes
+ku-iq:
 -واژگان کلیدی
-en-US:Keywords
-ku-IQ:
+en-us:Keywords
+ku-iq:
 -کلمه‌ی کلیدی
-en-US:Keyword
-ku-IQ:
+en-us:Keyword
+ku-iq:
 -دیدگاه
-en-US:Comment
-ku-IQ:
+en-us:Comment
+ku-iq:
 -ارسال
-en-US:Send
-ku-IQ:
+en-us:Send
+ku-iq:
 -عنوان
-en-US:Title
-ku-IQ:
+en-us:Title
+ku-iq:
 -سریع
-en-US:Fast
-ku-IQ:
+en-us:Fast
+ku-iq:
 -فرم‌ساز
-en-US:Form Builder
-ku-IQ:
+en-us:Form Builder
+ku-iq:
 -بالا
-en-US:Top
-ku-IQ:
+en-us:Top
+ku-iq:
 -متوسط
-en-US:Medium
-ku-IQ:
+en-us:Medium
+ku-iq:
 -مرکز
-en-US:Center
-ku-IQ:
+en-us:Center
+ku-iq:
 -کند
-en-US:Slow
-ku-IQ:
+en-us:Slow
+ku-iq:
 -پایین
-en-US:Bottom
-ku-IQ:
+en-us:Bottom
+ku-iq:
 -متن
-en-US:Body
-ku-IQ:
+en-us:Body
+ku-iq:
 -پرونده
-en-US:File
-ku-IQ:
+en-us:File
+ku-iq:
 -به‌روز رسانی
-en-US:Update
-ku-IQ:
+en-us:Update
+ku-iq:
 -حذف
-en-US:Delete
-ku-IQ:
+en-us:Delete
+ku-iq:
 -حذف پیوست
-en-US:Delete Attachement
-ku-IQ:
+en-us:Delete Attachement
+ku-iq:
 -انصراف
-en-US:Cancel
-ku-IQ:
+en-us:Cancel
+ku-iq:
 -حساب کاربری
-en-US:Account
-ku-IQ:
+en-us:Account
+ku-iq:
 -افزودن فیلد
-en-US:Add Field
-ku-IQ:
+en-us:Add Field
+ku-iq:
 -متن تک خط
-en-US:Single Line Text
-ku-IQ:
+en-us:Single Line Text
+ku-iq:
 -متن چند خط
-en-US:Multiline Text
-ku-IQ:
+en-us:Multiline Text
+ku-iq:
 -لیست آبشاری
-en-US:Drop Down List
-ku-IQ:
+en-us:Drop Down List
+ku-iq:
 -دکمه‌های رادیویی
-en-US:Radio buttons
-ku-IQ:
+en-us:Radio buttons
+ku-iq:
 -چک باکس
-en-US:Check Box
-ku-IQ:
+en-us:Check Box
+ku-iq:
 -باکس تائید
-en-US:Agree Box
-ku-IQ:
+en-us:Agree Box
+ku-iq:
 -خروج
-en-US:Exit
-ku-IQ:
+en-us:Exit
+ku-iq:
 -تائید
-en-US:Apply
-ku-IQ:
+en-us:Apply
+ku-iq:
 -پست
-en-US:Post
-ku-IQ:
+en-us:Post
+ku-iq:
 -پرونده‌ها
-en-US:Files
-ku-IQ:
+en-us:Files
+ku-iq:
 -ویرایش
-en-US:Edit
-ku-IQ:
+en-us:Edit
+ku-iq:
 -ویرایش تم
-en-US:Edit theme
-ku-IQ:
+en-us:Edit theme
+ku-iq:
 -ضمیمه
-en-US:Attachement
-ku-IQ:
+en-us:Attachement
+ku-iq:
 -اسم
-en-US:name
-ku-IQ:
+en-us:name
+ku-iq:
 -نام
-en-US:Firstname
-ku-IQ:
+en-us:Firstname
+ku-iq:
 -نام خانوادگی
-en-US:Lastname
-ku-IQ:
+en-us:Lastname
+ku-iq:
 -موضوع
-en-US:Subject
-ku-IQ:
+en-us:Subject
+ku-iq:
 -نام کاربری
-en-US:Username
-ku-IQ:
+en-us:Username
+ku-iq:
 -کلمه‌ی عبور
-en-US:Password
-ku-IQ:
+en-us:Password
+ku-iq:
 -کلمه‌ی عبور قبلی نادرست است
-en-US:Wrong previous password
-ku-IQ:
+en-us:Wrong previous password
+ku-iq:
 -مشاهده پاسخ‌های قبلی
-en-US:Previous answers
-ku-IQ:
+en-us:Previous answers
+ku-iq:
 -ورود به سیستم
-en-US:Sign In
-ku-IQ:
+en-us:Sign In
+ku-iq:
 -تکرار
-en-US:Confirm
-ku-IQ:
+en-us:Confirm
+ku-iq:
 -تراکنش‌های مالی
-en-US:Payments
-ku-IQ:
+en-us:Payments
+ku-iq:
 -پیش نیاز
-en-US:Requrements
-ku-IQ:
+en-us:Requrements
+ku-iq:
 -تغییر کلمه‌ی عبور
-en-US:Change Password
-ku-IQ:
+en-us:Change Password
+ku-iq:
 -جعبه‌ی همه
-en-US:Everyone's box
-ku-IQ:
+en-us:Everyone's box
+ku-iq:
 -فعالیت
-en-US:Activity
-ku-IQ:
+en-us:Activity
+ku-iq:
 -گذرواژه‌ی جدید
-en-US:New password
-ku-IQ:
+en-us:New password
+ku-iq:
 -پایگاه داده
-en-US:Database
-ku-IQ:
+en-us:Database
+ku-iq:
 -گذرواژه‌ی قبلی
-en-US:Previous password
-ku-IQ:
+en-us:Previous password
+ku-iq:
 -لطفا پیش نیاز معتبر را ارسال فرمایید
-en-US:Please fill out the prerequested form
-ku-IQ:
+en-us:Please fill out the prerequested form
+ku-iq:
 -تصویر
-en-US:Image
-ku-IQ:
+en-us:Image
+ku-iq:
 -عضویت
-en-US:Regsiter
-ku-IQ:
+en-us:Regsiter
+ku-iq:
+-لطفا وارد شوید
+en-us:Please Sign In
+ku-iq:
 -فرایند با موفقیت اعمال شد
-en-US:Your request done successfuly
-ku-IQ:
+en-us:Your request done successfuly
+ku-iq:
 -عبارت را وارد نمائید
-en-US:Enter the phrase
-ku-IQ:
+en-us:Enter the phrase
+ku-iq:
 -نتیجه یافت نشد
-en-US:No result found
-ku-IQ:
+en-us:No result found
+ku-iq:
 -پایگاه داده‌ی همه
-en-US:Everyone's Database
-ku-IQ:
+en-us:Everyone's Database
+ku-iq:
 -ویرایش نسخه‌ی اصلی
-en-US:Edit original
-ku-IQ:
+en-us:Edit original
+ku-iq:
 -به روز رسانی
-en-US:Update
+en-us:Update
 -جعبه
-en-US:Box
-ku-IQ:
+en-us:Box
+ku-iq:
 -احراز هویت ناموفق
 en-us:Login failed
-ku-IQ:
+ku-iq:
 -ذخیره
-en-US:Save
-ku-IQ:
+en-us:Save
+ku-iq:
 -ویرایش فارسی
-en-US:Edit English
-ku-IQ:
+en-us:Edit English
+ku-iq:
 -کاربران
-en-US:Users
-ku-IQ:
-
--<?= $Translate->Label("عبارت"); ?>
+en-us:Users
+ku-iq:
+-انتخاب زبان
+en-us:Choose Language
+ku-iq:
+-انتخاب
+en-us:Choose
+-زبان شما فارسی است
+en-us:Your language is English
+ku-iq:
+aq-ar:
+-
+en-us:Your language is English
+ku-iq:
+aq-ar:
+<?php echo Translate::Label("عبارت") ?>

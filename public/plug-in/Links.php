@@ -47,6 +47,12 @@ class Links
         <meta name="keywords" content="' . Config::META_KEYWORDS . '">
         <meta name="author" content="' . $META_AUTHOR . '">
         <meta name="generator" content="SnowKMS ' . (new Xei())::THEVERSION . '">
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+        <meta name="language" content="'. Config::LANGUAGE . '" />
+        <meta name="geo.region" CONTENT="'. Config::REGION . '" />
+        <meta name="googlebot" content="INDEX, follow" />
+        <meta name="robots" content="index, follow"/>
+        <meta itemprop="name" content="'. Config::META_DESCRIPTION . '">
         ';
     }
 }

@@ -25,7 +25,7 @@ class Post extends AModel
             'Body' => '',
             'UserId' => NULL,
             'Status' => 'Publish',
-            'Language' => 'en-US',
+            'Language' => 'en-us',
             'RefrenceId' => NULL,
             'Index' => '0',
             'Deleted' => false,

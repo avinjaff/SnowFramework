@@ -2,13 +2,17 @@
 
 class Translate
 {
-    public static function Label($key)
+    public static function Label($key, $Lang = null)
     {
-        $language = "en-US";
-        if(isset($_COOKIE["LANG"])) {
+        $language = "en-us";
+        if ($Lang)
+        {
+            $language = $Lang;
+        }
+        else if(isset($_COOKIE["LANG"])) {
             $language = $_COOKIE["LANG"];
         }
-        if ($language == "fa-IR")
+        if ($language == "fa-ir")
         {
             return $key;
         }

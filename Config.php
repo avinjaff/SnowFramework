@@ -13,13 +13,16 @@ class Config
     {
         $languages = array();
 
-        array_push($languages, new Language("fa", "فارسی", "IR", "r", "🇮🇷"));
-        array_push($languages, new Language("en", "English", "US", "l", "🇺🇸"));
+        array_push($languages, new Language("fa", "فارسی", "ir", "r", "🇮🇷"));
+        array_push($languages, new Language("en", "English", "us", "l", "🇺🇸"));
+        array_push($languages, new Language("ku", "کوردی", "iq", "r", "🇮🇶"));
+        array_push($languages, new Language("ar", "العربية", "ae", "r", "🇦🇪"));
         
         return $languages;
     }
 
     const TimeZone = "Asia/Tehran";
+    const DefaultLanguage = "en-us";
 
     const ConnectionString_SERVER  = "localhost";
     const ConnectionString_DATABASE = "SnowKMS";
@@ -30,7 +33,7 @@ class Config
     const TITLE = "سامانه‌ی مدیریت دانش";
     const LANGUAGE = "English";
     const REGION = "IR";
-    const NAME = "KMS";
+    const NAME = "مدیر دانش";
     const SPONSOR = "Gordarg";
     const META_KEYWORDS = "knowledge, social network, content, SEO, telecommunications, e-business";
     const META_DESCRIPTION = "DESCRIPTION HERE";

@@ -62,6 +62,11 @@ if (!file_exists($Filename))
     return;
 }
 
+if(!isset($_COOKIE["LANG"]))   
+{
+    header('Location:language/' . Config::DefaultLanguage);
+}
+
 include_once BASEPATH.'public/master/public-header.php';
 include_once $Filename;
 include_once BASEPATH.'public/master/public-footer.php';

@@ -11,7 +11,7 @@ mt_rand( 0, 0x3fff ) | 0x8000,
 mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ));
 
 $Title = '';
-$Language = 'fa-IR';
+$Language = 'fa-ir';
 $Index = '0';
 $Submit = $datetime;        // Comes from Init.php
 $UserID = Functionalities::IfExistsIndexInArray($_SESSION, 'PHP_AUTH_ID');       // Comes from secure.php
