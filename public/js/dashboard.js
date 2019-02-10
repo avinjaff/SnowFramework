@@ -115,3 +115,9 @@ Hi = {
         });
     }
 }
+
+Hi.load('posts');
+
+$(window).on('load', function () {
+  Hi.loading(false);
+});
