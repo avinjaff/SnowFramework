@@ -29,6 +29,7 @@ class Config
     const ConnectionString_USERNAME  = "root";
     const ConnectionString_PASSWORD = "123";
 
+    // TODO: Multi Domain Support
     const BASEURL = "http://localhost/SnowFramework/"; //       /Anything
     const TITLE = "سامانه‌ی مدیریت دانش";
     const LANGUAGE = "English";

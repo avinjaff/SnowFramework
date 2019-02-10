@@ -1,7 +1,4 @@
 <?php
-$Language = $PATHINFO[2];
-$Id = $PATHINFO[3];
-$row = $PostDetail->Select(-1, 1, 'MasterID', 'ASC', "WHERE `Language`='" . $Language . "' AND `MasterID`='" . $Id . "'")[0];
 if ($row == null)
 {
     exit(header("HTTP/1.0 404 Not Found"));
@@ -29,11 +26,57 @@ else
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+    <h1 class="cover-heading"><?php echo $row['Title'] ?></h1>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+      <a href="<?php echo $BASEURL . 'explore/@' . $row['Username'] ?>" class="btn btn-lg btn-secondary"><?php echo $row['Username'] ?></a>
+      <span><?php echo $row['Submit'] ?></span>
+      <!-- <a class="attachment" href="download.php?id=' . $Id . '">' . $functionalitiesInstance->label("دانلود پیوست") . '</a>' -->
     </p>
+    <article>
+    <?php echo $Parsedown->text($row['Body']) ?>   
+    </article>
+
+    <?php
+    // TODO:
+    include ('helper/post_comment.php');
+    ?>
+    <div class="comments">
+        <?php
+        foreach ($PostDetail->Select(-1, -1, "Submit", "DESC", "WHERE `Type` = 'COMT' AND `RefrenceId`='" . $Id . "'") as $row) {
+            $_GET['masterid'] = $row['MasterID'];
+            $_GET["type"] = 'COMT';
+            
+            echo '<div>';
+            /*
+            $UserId = $authentication->login('comment_helper.php');
+            if ($UserId != null)
+            {
+                // echo $row['MasterID'];
+                // TODO: Delete
+            }
+            */
+            echo '<img src="drawable/profile.png" />';
+            echo '<span>' . $row['Body'] . '</span>';
+            // TODO
+            // include ('helper/post_comment_delete.php');
+            echo '</div>';
+        }
+        ?>
+    </div>
+    <div class="keywords">
+        <?php
+        foreach ($PostDetail->Select(-1, -1, "Submit", "DESC", "WHERE `Type` = 'KWRD' AND `RefrenceId`='" . $Id . "'") as $row) {
+            $_GET['masterid'] = $row['MasterID'];
+            $_GET["type"] = 'KWRD';
+            
+            echo '<div>';
+            /* TODO: Delete keyword helper here */
+            echo '  <a href="' . $BASEURL . 'explore/%23' . substr($row['Title'], 1) . '" rel="tag">' . $row['Title'] . '</a>';
+            echo '</div>';
+        }
+        ?>
+    </div>
+
   </main>
 
 </div>

@@ -40,21 +40,6 @@ $PostDetail = new PostDetail();
 require_once BASEPATH.'public/plug-in/Parsedown.php';
 $Parsedown = new Parsedown();
 
-include_once BASEPATH.'public/plug-in/Links.php';
-if ($PATHINFO[1] == 'view')
-{
-    $META_DESCRIPTION = 'TODO: BASED ON POST';
-    $META_AUTHOR = 'TODO: BASED ON POST';
-}
-else
-{
-    $META_DESCRIPTION = Config::META_DESCRIPTION;
-    $META_AUTHOR = Config::META_AUTHOR;
-}
-$META = Links::GenerateMeta($META_DESCRIPTION, $META_AUTHOR);
-$CSSLINKS = Links::GenerateCssLinks($URL, $CURRENTLANGUAGE, $BASEURL);
-$JSLINKS = Links::GenerateJsLinks($URL, $CURRENTLANGUAGE, $BASEURL);
-
 $Filename = BASEPATH.'public/'.$PATHINFO[1].'.php';
 if (!file_exists($Filename))
 {
@@ -66,6 +51,25 @@ if(!isset($_COOKIE["LANG"]))
 {
     header('Location:language/' . Config::DefaultLanguage);
 }
+
+include_once BASEPATH.'public/plug-in/Links.php';
+if ($PATHINFO[1] == 'view')
+{
+    $Language = $PATHINFO[2];
+    $Id = $PATHINFO[3];
+    $row = $PostDetail->Select(-1, 1, 'MasterID', 'ASC', "WHERE `Language`='" . $Language . "' AND `MasterID`='" . $Id . "'")[0];
+    $META_DESCRIPTION = Text::GenerateAbstractForPost($Parsedown->text($row['Body']), 500);
+    $META_AUTHOR = $row['Username'];
+}
+else
+{
+    $META_DESCRIPTION = Config::META_DESCRIPTION;
+    $META_AUTHOR = Config::META_AUTHOR;
+}
+$META = Links::GenerateMeta($META_DESCRIPTION, $META_AUTHOR);
+$CSSLINKS = Links::GenerateCssLinks($URL, $CURRENTLANGUAGE, $BASEURL);
+$JSLINKS = Links::GenerateJsLinks($URL, $CURRENTLANGUAGE, $BASEURL);
+
 
 include_once BASEPATH.'public/master/public-header.php';
 include_once $Filename;

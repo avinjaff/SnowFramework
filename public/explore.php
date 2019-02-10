@@ -1,57 +1,46 @@
 <?php
-$Q = Functionalities::IfExistsIndexInArray($_GET,'Q');
+$Q = Functionalities::IfExistsIndexInArray($PATHINFO, 2) != null ? $PATHINFO[2]
+: (
+   Functionalities::IfExistsIndexInArray($_GET, 'Q')
+);
 ?>
-<form class="example" method="GET" action="search.php">
-    <input type="text" name="Q" placeholder="<?= $Translate->Label("عبارت را وارد نمائید"); ?>" value="<?= $Q ?>" />
-    <input type="submit" value = "<?= $Translate->Label("جستجو"); ?>" />
-</form>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <span class="navbar-brand" href="#"><?php echo Translate::Label(Config::TITLE) ?></span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><?php echo Translate::Label('خانه') ?><span class="sr-only">(<?php echo Translate::Label('فعلی') ?>)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h1><?php echo Translate::Label('کاوش') ?>.</h1>
+    <form class="form-inline" action="<?php echo $BASEURL ?>explore" method="GET" >
+        <input class="form-control input-lg" type="text" name="Q" placeholder="<?= $Translate->Label("عبارت را وارد نمائید"); ?>" value="<?= $Q ?>" />
+        <input class="btn btn-lg btn-primary" type="submit" value = "<?= $Translate->Label("جستجو"); ?>" />
+    </form>
+  </div>
+</main>
+<div class="container">
 <?php
 if ($Q != null)
 {
-    $a="SELECT DISTINCT
-    `A`.* FROM `post_details` `A`
+    include_once BASEPATH . 'core/Bridge.php';
+    $rows = Bridge::Execute('explore', [['Q', $Q]], true);
 
-    LEFT OUTER JOIN `post_details` as pd2
-    ON A.MasterID = pd2.RefrenceID
-
-    WHERE
-    (
-        `A`.`Title` LIKE '%". $Q ."%'
-    OR `pd2`.`Title` LIKE '%". $Q ."%'
-    OR CONCAT ('@', `A`.`Username`) LIKE '". $Q ."'
-    OR `A`.`Body` LIKE '%". $Q ."%'
-    )
-    AND
-    (
-        `A`.`Type` = 'POST'
-    OR  `A`.`Type` = 'COMT' 
-    OR  `A`.`Type` = 'FILE' 
-    -- OR  `A`.`Type` = 'KWRD' 
-    OR  `A`.`Type` = 'QUST'
-    )
-    AND
-    (
-        (
-            `pd2`.`Type` = 'POST'
-            AND
-            `A`.RefrenceID IS NOT NULL
-        )
-        OR
-        (
-            `A`.RefrenceID IS NULL
-        )
-    )
-
-    ORDER BY `A`.`Submit`
-    Limit 10
-    ;";
-    $b=mysqli_query($conn,$a);
-    // echo $a;
-    if ($b->num_rows > 0) {
-        while($row = mysqli_fetch_array($b)){
+    if (count($rows)>1)
+    {
+        foreach ($rows as $row) {
             echo '<div class="' . $row['Type'] . '">';
             switch ($row['Type'])
             {
+                // TODO: UI
                 case 'COMT':
                     echo '<a href="view.php?lang=' . $row['Language'] . '&id=' . $row['RefrenceID'] . '">' . $row['Body']. '</a>';
                     break;
@@ -75,12 +64,10 @@ if ($Q != null)
             echo "</div>";
         }
     }
-    else{
-        echo $Translate->Label("نتیجه یافت نشد");
+    else
+    {
+        print($Translate->Label("نتیجه یافت نشد"));
     }
 }
 ?>
-
-<?php
-include ('master/public-footer.php');
-?>
+</div>
